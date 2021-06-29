@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import ContextRecipe from './ContextRecipe';
 
 function RecipeProvider({ children }) {
@@ -18,5 +19,9 @@ function RecipeProvider({ children }) {
     </ContextRecipe.Provider>
   );
 }
+
+RecipeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default RecipeProvider;
