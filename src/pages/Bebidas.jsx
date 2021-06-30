@@ -6,7 +6,7 @@ function Bebidas() {
   return (
     <>
       <Header />
-      <p>olá</p>
+      <p data-testid="page-title">olá</p>
       <Footer />
     </>
   );

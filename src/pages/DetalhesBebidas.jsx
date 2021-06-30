@@ -2,9 +2,8 @@ import React from 'react';
 
 function DetalhesBebidas() {
   return (
-    <>
-      DetalhesBebidas
-    </>
+    <p data-testid="page-title">DetalhesBebidas</p>
+
   );
 }
 

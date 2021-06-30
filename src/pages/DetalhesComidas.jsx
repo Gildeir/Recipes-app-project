@@ -2,9 +2,7 @@ import React from 'react';
 
 function DetalhesComidas() {
   return (
-    <>
-      DetalhesComidas
-    </>
+    <p data-testid="page-title">DetalhesComidas</p>
   );
 }
 

@@ -6,6 +6,7 @@ function OrigemComidas() {
   return (
     <>
       <Header />
+      <p data-testid="page-title">Origem Comida</p>
       <Footer />
     </>
   );

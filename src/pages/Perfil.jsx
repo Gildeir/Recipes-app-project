@@ -6,6 +6,7 @@ function Perfil() {
   return (
     <>
       <Header />
+      <p data-testid="page-title">Perfil</p>
       <Footer />
     </>
   );
