@@ -27,7 +27,11 @@ function App() {
       <Route exact path="/" component={ Login } />
       <Route exact path="/comidas" component={ Comidas } />
       <Route exact path="/bebidas" component={ Bebidas } />
-      <Route exact path="/comidas/:id" component={ DetalhesComidas } />
+      <Route
+        exact
+        path="/comidas/:id"
+        render={ (props) => <DetalhesComidas { ...props } /> }
+      />
       <Route exact path="/bebidas/:id" component={ DetalhesBebidas } />
       <Route path="/comidas/:id/in-progress" component={ ProgressoComidas } />
       <Route path="/bebidas/:id/in-progress" component={ ProgressoBebidas } />

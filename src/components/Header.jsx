@@ -1,13 +1,17 @@
 import React, { useState, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import ContextRecipe from '../provider/ContextRecipe';
+import ChangeTitle from './ChangeTitle';
 
-function Header(props) {
-  const { setUserClick, searchAPI, setItemDigitado } = useContext(ContextRecipe);
-  const { pathname } = useLocation();
+function Header() {
+  const { setUserClick,
+    searchAPI,
+    setItemDigitado,
+    itemDigitado, userClick, apiDataFood, apiDataDrink } = useContext(ContextRecipe);
+  // const { pathname } = useLocation();
   const [enableSearch, setEnableSearch] = useState(false);
 
   const handleSearch = () => {
@@ -23,20 +27,23 @@ function Header(props) {
     setUserClick(value);
   }
 
-  function changeTitle() {
-    if (pathname === '/comidas') {
-      return <h3 data-testid="page-title">Comidas</h3>;
+  ChangeTitle();
+
+  const filterSearch = ({ value }) => {
+    setItemDigitado(value);
+    if (userClick === 'Primeira letra' && itemDigitado.length > 0) {
+      console.log('entrou no if');
+      alert('Sua busca deve conter somente 1 (um) caracter');
     }
-    if (pathname === '/perfil') {
-      return <h3 data-testid="page-title">Perfil</h3>;
+  };
+  console.log(apiDataDrink);
+  const alertZeroFound = async () => {
+    await searchAPI();
+    if (apiDataFood || apiDataDrink === null) {
+      console.log('entrei no if do null');
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
-    if (pathname === '/bebidas') {
-      return <h3 data-testid="page-title">Bebidas</h3>;
-    }
-    if (pathname === '/explorar') {
-      return <h3 data-testid="page-title">Explorar</h3>;
-    }
-  }
+  };
 
   return (
     /* - Tem os data-testids `profile-top-btn`, `page-title` e `search-top-btn` */
@@ -52,7 +59,7 @@ function Header(props) {
         </Link>
 
         {/* <h3 data-testid="page-title">Comidas</h3> */}
-        {changeTitle()}
+        {ChangeTitle()}
 
         <input
           type="image"
@@ -66,7 +73,7 @@ function Header(props) {
           data-testid="search-input"
           label="inputIngredients"
           alt="search input"
-          onChange={ (event) => setItemDigitado(event.target.value) }
+          onChange={ ({ target }) => filterSearch(target) }
         /> : null }
         <br />
         <label htmlFor="Ingrediente">
@@ -109,7 +116,7 @@ function Header(props) {
           type="button"
           data-testid="exec-search-btn"
           label="Buscar"
-          onClick={ () => searchAPI() }
+          onClick={ () => alertZeroFound() }
         />
       </section>
     </header>
