@@ -2,7 +2,9 @@ import React from 'react';
 
 function DetalhesComidas() {
   return (
-    <p data-testid="page-title">DetalhesComidas</p>
+    <div>
+      { console.log('opa') }
+    </div>
   );
 }
 
