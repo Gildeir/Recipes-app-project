@@ -39,11 +39,10 @@ function Header() {
   };
   console.log(apiDataDrink);
   const alertZeroFound = async () => {
-    const alert = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
     await searchAPI();
     if (apiDataFood || apiDataDrink === null) {
       console.log('entrei no if do null');
-      alert(alert);
+      customAlert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
   };
 
