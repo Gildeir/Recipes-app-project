@@ -33,6 +33,7 @@ function Header() {
     setItemDigitado(value);
     if (userClick === 'Primeira letra' && itemDigitado.length > 0) {
       console.log('entrou no if');
+      // eslint-disable-next-line no-alert
       alert('Sua busca deve conter somente 1 (um) caracter');
     }
   };
