@@ -1,0 +1,14 @@
+.footer{
+  display: flex;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  justify-content: space-between;
+  
+}
+
+.header_bar {
+  display: flex;
+  justify-content: space-around;
+  padding:10px;
+}
