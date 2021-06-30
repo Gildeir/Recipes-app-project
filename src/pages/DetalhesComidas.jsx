@@ -6,7 +6,7 @@ import React, { /* useContext  */} from 'react';
 function DetalhesComidas(props) {
   console.log(props);
   // const { apiDataFood } = useContext(ContextRecipe);
-  return (
+  return (//
     <div>
       { console.log('opa') }
     </div>
