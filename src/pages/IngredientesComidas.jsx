@@ -6,6 +6,7 @@ function IngredientesComidas() {
   return (
     <>
       <Header />
+      <p data-testid="page-title">Ingre Comida</p>
       <Footer />
     </>
   );

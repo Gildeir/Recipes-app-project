@@ -5,7 +5,7 @@ function ReceitasFeitas() {
   return (
     <>
       <Header />
-      <p>olá</p>
+      <p data-testid="page-title">Receita Feita</p>
     </>
   );
 }

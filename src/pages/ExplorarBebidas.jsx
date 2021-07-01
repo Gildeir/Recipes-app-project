@@ -6,6 +6,7 @@ function ExplorarBebidas() {
   return (
     <>
       <Header />
+      <p data-testid="page-title">ExplorarBebidas</p>
       <Footer />
     </>
   );

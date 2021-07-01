@@ -1,12 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import ContextRecipe from '../provider/ContextRecipe';
 
 function Comidas() {
+  const { apiDataFood } = useContext(ContextRecipe);
+
   return (
     <>
       <Header />
-      <p>olá</p>
+      <ol>
+        {apiDataFood
+          ? apiDataFood.map((iten, index) => (
+            <li
+              data-testid={ `${index}-recipe-card` }
+              key={ index }
+            >
+              <div>
+                <Link to={ `/comidas/${iten.idMeal}` }>
+                  <img
+                    data-testid={ `${index}-card-img` }
+                    src={ iten.strMealThumb }
+                    width="50px"
+                    alt="Food"
+                  />
+                  <p data-testid={ `${index}-card-name` }>{ iten.strMeal }</p>
+                </Link>
+              </div>
+            </li>)) : <p>Carregando...</p>}
+      </ol>
       <Footer />
     </>
   );

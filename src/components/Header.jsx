@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import ContextRecipe from '../provider/ContextRecipe';
+import ChangeTitle from './ChangeTitle';
 
 function Header() {
+  const { setUserClick,
+    searchAPI,
+    setItemDigitado,
+    itemDigitado, userClick, apiDataFood, apiDataDrink } = useContext(ContextRecipe);
+  // const { pathname } = useLocation();
   const [enableSearch, setEnableSearch] = useState(false);
-  const [userClick, setUserClick] = useState('');
-  console.log(userClick);
+
   const handleSearch = () => {
     if (enableSearch === true) {
       setEnableSearch(false);
@@ -20,6 +26,25 @@ function Header() {
   function handleFilter({ target: { value } }) {
     setUserClick(value);
   }
+
+  ChangeTitle();
+
+  const filterSearch = ({ value }) => {
+    setItemDigitado(value);
+    if (userClick === 'Primeira letra' && itemDigitado.length > 0) {
+      console.log('entrou no if');
+      // eslint-disable-next-line no-alert
+      alert('Sua busca deve conter somente 1 (um) caracter');
+    }
+  };
+  console.log(apiDataDrink);
+  const alertZeroFound = async () => {
+    await searchAPI();
+    if (apiDataFood || apiDataDrink === null) {
+      console.log('entrei no if do null');
+      customAlert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
+  };
 
   return (
     /* - Tem os data-testids `profile-top-btn`, `page-title` e `search-top-btn` */
@@ -34,7 +59,8 @@ function Header() {
           />
         </Link>
 
-        <h3 data-testid="page-title">Comidas</h3>
+        {/* <h3 data-testid="page-title">Comidas</h3> */}
+        {ChangeTitle()}
 
         <input
           type="image"
@@ -46,44 +72,52 @@ function Header() {
         {enableSearch === true ? <input
           type="text"
           data-testid="search-input"
-          value="ingrediente"
           label="inputIngredients"
           alt="search input"
-          onChange={ {} }
+          onChange={ ({ target }) => filterSearch(target) }
         /> : null }
         <br />
-
-        <input
-          type="radio"
-          data-testid="ingredient-search-radio"
-          name="food"
-          value="ingredients"
-          label="name"
-          onChange={ handleFilter }
-        />
-
-        <input
-          type="radio"
-          data-testid="name-search-radio"
-          name="food"
-          value="searchByName"
-          label="name"
-          onChange={ handleFilter }
-        />
-
-        <input
-          type="radio"
-          data-testid="first-letter-search-radio"
-          name="food"
-          value="searchByFirstLetter"
-          label="letter"
-          onChange={ handleFilter }
-        />
+        <label htmlFor="Ingrediente">
+          {' '}
+          Ingrediente
+          <input
+            type="radio"
+            data-testid="ingredient-search-radio"
+            name="food"
+            value="Ingrediente"
+            label="Ingrediente"
+            onChange={ handleFilter }
+          />
+        </label>
+        <label htmlFor="Nome">
+          {' '}
+          Nome
+          <input
+            type="radio"
+            data-testid="name-search-radio"
+            name="food"
+            value="busca por nome"
+            label="Nome"
+            onChange={ handleFilter }
+          />
+        </label>
+        <label htmlFor="Letra">
+          {' '}
+          Letra
+          <input
+            type="radio"
+            data-testid="first-letter-search-radio"
+            name="food"
+            value="Primeira letra"
+            label="Letra"
+            onChange={ handleFilter }
+          />
+        </label>
         <Button
           type="button"
           data-testid="exec-search-btn"
-          label="search"
-          onClick={ {} }
+          label="Buscar"
+          onClick={ () => alertZeroFound() }
         />
       </section>
     </header>

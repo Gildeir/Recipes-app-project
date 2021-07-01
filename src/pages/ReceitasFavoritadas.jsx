@@ -5,7 +5,7 @@ function ReceitasFavoritas() {
   return (
     <>
       <Header />
-      <p>olá</p>
+      <p data-testid="page-title">Receita F</p>
     </>
   );
 }
