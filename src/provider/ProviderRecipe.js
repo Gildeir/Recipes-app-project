@@ -16,12 +16,6 @@ function RecipeProvider({ children }) {
   const [categoryBtn, setCategoryBtn] = useState('');
 
   useEffect(() => {
-    fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=butter')
-      .then((response) => response.json())
-      .then(({ meals }) => setApiDataFood(meals));
-    fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=lemon')
-      .then((response) => response.json())
-      .then(({ drinks }) => setApiDataDrink(drinks));
     // botôes de categoria comida
     if (location.pathname === '/comidas') {
       fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')

@@ -10,10 +10,9 @@ function Comidas() {
   return (
     <>
       <Header />
+      { console.log(categoryBtn)}
       <div>
-        {/* {console.log(categoryBtn)} */}
-
-        { categoryBtn.map((category) => (
+        { Object.values(categoryBtn).map((category) => (
           <button
             data-testid={ `${category.strCategory}-category-filter` }
             key={ category.strCategory }

@@ -5,8 +5,24 @@ import Footer from '../components/Footer';
 function ExplorarBebidas() {
   return (
     <>
-      <Header />
-      <p data-testid="page-title">ExplorarBebidas</p>
+      <Header title="Explorar Bebidas" />
+      <button
+        type="button"
+        data-testid="explore-by-ingredient"
+        label="Por Ingredientes"
+        onClick={ {} }
+      >
+        Por Ingredientes
+      </button>
+
+      <button
+        type="button"
+        data-testid="explore-surprise"
+        label="Me Surpreenda!"
+        onClick={ {} }
+      >
+        Me Surpreenda!
+      </button>
       <Footer />
     </>
   );

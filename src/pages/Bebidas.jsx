@@ -5,10 +5,32 @@ import Footer from '../components/Footer';
 import ContextRecipe from '../provider/ContextRecipe';
 
 function Bebidas() {
-  const { apiDataDrink } = useContext(ContextRecipe);
+  const { apiDataDrink, categoryBtn } = useContext(ContextRecipe);
   return (
     <>
       <Header />
+      <div>
+        { Object.values(categoryBtn).map((category) => (
+          <button
+            data-testid={ `${category.strCategory}-category-filter` }
+            key={ category.strCategory }
+            type="button"
+            name={ category.strCategory }
+            value={ category.strCategory }
+          >
+            { category.strCategory }
+          </button>
+        )) }
+        <button
+          data-testid="All-category-filter"
+          key="all"
+          type="button"
+          name="all"
+          value="all"
+        >
+          All
+        </button>
+      </div>
       <ol>
         {apiDataDrink
           ? apiDataDrink.map((iten, index) => (

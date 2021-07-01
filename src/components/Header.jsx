@@ -11,7 +11,6 @@ function Header() {
     searchAPI,
     setItemDigitado,
     itemDigitado, userClick, apiDataFood, apiDataDrink } = useContext(ContextRecipe);
-  // const { pathname } = useLocation();
   const [enableSearch, setEnableSearch] = useState(false);
 
   const handleSearch = () => {
