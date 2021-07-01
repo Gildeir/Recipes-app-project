@@ -32,7 +32,7 @@ function App() {
         path="/comidas/:id"
         render={ (props) => <DetalhesComidas { ...props } /> }
       />
-      <Route exact path="/bebidas/:id" component={ DetalhesBebidas } />
+      <Route exact path="/bebidas/:id" render={ (props) => <DetalhesBebidas { ...props } /> } />
       <Route path="/comidas/:id/in-progress" component={ ProgressoComidas } />
       <Route path="/bebidas/:id/in-progress" component={ ProgressoBebidas } />
       <Route exact path="/explorar" component={ Explorar } />
