@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import ContextRecipe from './ContextRecipe';
 
 function RecipeProvider({ children }) {
+  const location = useLocation();
   const [login, setLogin] = useState({
     email: '',
     password: '',
@@ -12,21 +13,33 @@ function RecipeProvider({ children }) {
   const [apiDataDrink, setApiDataDrink] = useState([]);
   const [userClick, setUserClick] = useState('');
   const [itemDigitado, setItemDigitado] = useState('');
+  const [categoryBtn, setCategoryBtn] = useState('');
 
   useEffect(() => {
-    fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=butter')
-      .then((response) => response.json())
-      .then(({ meals }) => setApiDataFood(meals));
-    fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=lemon')
-      .then((response) => response.json())
-      .then(({ drinks }) => setApiDataDrink(drinks));
+    // botôes de categoria comida
+    if (location.pathname === '/comidas') {
+      fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
+        .then((response) => response.json())
+        .then(({ meals }) => {
+          const limite = 5;
+          const result = meals.slice(0, limite);
+          setCategoryBtn(result);
+        }).catch(() => setCategoryBtn(null));
+    }
+    // botôes de categoria bebidas
+    if (location.pathname === '/bebidas') {
+      fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list')
+        .then((response) => response.json())
+        .then(({ drinks }) => {
+          const limite = 5;
+          const result = drinks.slice(0, limite);
+          setCategoryBtn(result);
+        }).catch(() => setCategoryBtn(null));
+    }
   }, []);
-
-  const location = useLocation();
 
   const searchAPI = () => {
     if (location.pathname === '/comidas') {
-      console.log(location.pathname);
       if (userClick === 'Ingrediente') {
         fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${itemDigitado}`)
           .then((response) => response.json()).then(({ meals }) => {
@@ -74,7 +87,6 @@ function RecipeProvider({ children }) {
       }
     }
   };
-
   const values = {
     login,
     setLogin,
@@ -85,6 +97,8 @@ function RecipeProvider({ children }) {
     searchAPI,
     itemDigitado,
     setItemDigitado,
+    categoryBtn,
+    setCategoryBtn,
   };
 
   return (

@@ -11,7 +11,6 @@ function Header() {
     searchAPI,
     setItemDigitado,
     itemDigitado, userClick, apiDataFood, apiDataDrink } = useContext(ContextRecipe);
-  // const { pathname } = useLocation();
   const [enableSearch, setEnableSearch] = useState(false);
 
   const handleSearch = () => {
@@ -42,7 +41,7 @@ function Header() {
     await searchAPI();
     if (apiDataFood || apiDataDrink === null) {
       console.log('entrei no if do null');
-      customAlert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
   };
 
