@@ -1,6 +1,6 @@
 /* * {
-  margin: 0px; 
-  padding: 0px; 
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
 }
 
@@ -10,7 +10,7 @@ body, html {
   }
 
 .container-login100 {
-  width: 100%;  
+  width: 100%;
   min-height: 100vh;
   display: -webkit-box;
   display: -webkit-flex;
