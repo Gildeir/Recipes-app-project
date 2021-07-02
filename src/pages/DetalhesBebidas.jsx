@@ -1,6 +1,7 @@
 import React, { /* useContext, */ useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Carousel } from 'react-bootstrap';
 // import { Link } from 'react-router-dom';
 // import ContextRecipe from '../provider/ContextRecipe';
 import shareIcon from '../images/shareIcon.svg';
@@ -85,28 +86,27 @@ function DetalhesBebidas(props) {
           </li>))}
       </ol>
       <p data-testid="instructions">{resultApiID.strInstructions}</p>
-      <iframe
-        width="560"
-        height="315"
-        src={ resultApiID.strVideo }
-        data-testid="video"
-        title="YouTube video player"
-      />
-      <ol className="barraRolagem">
+
+      <Carousel>
         {!recomandation
           ? <p>Carregando...</p>
           : recomandation.slice(0, six).map((drink, index) => (
-            <li key={ index } data-testid={ `${index}-recomendation-card` }>
+            <Carousel.Item
+              key={ index }
+              data-testid={ `${index}-recomendation-card` }
+            >
               <img
+                className="carousel_image"
                 src={ drink.strMealThumb }
                 width="50px"
                 alt="foto comida RECOMENDADA"
               />
               <p>{drink.strArea}</p>
               <p data-testid={ `${index}-recomendation-title` }>{drink.strMeal}</p>
-            </li>))}
-      </ol>
+            </Carousel.Item>))}
+      </Carousel>
       <button
+        className="start-recipe-btn"
         type="button"
         data-testid="start-recipe-btn"
         label="Iniciar Receita"

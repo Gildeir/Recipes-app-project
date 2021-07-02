@@ -14,6 +14,7 @@ function RecipeProvider({ children }) {
   const [userClick, setUserClick] = useState('');
   const [itemDigitado, setItemDigitado] = useState('');
   const [categoryBtn, setCategoryBtn] = useState('');
+  const [resultApiID, setResultApiID] = useState({});
 
   useEffect(() => {
     // botôes de categoria comida
@@ -87,6 +88,7 @@ function RecipeProvider({ children }) {
       }
     }
   };
+
   const values = {
     login,
     setLogin,
@@ -99,6 +101,8 @@ function RecipeProvider({ children }) {
     setItemDigitado,
     categoryBtn,
     setCategoryBtn,
+    resultApiID,
+    setResultApiID,
   };
 
   return (

@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { /* useState, */ useContext } from 'react';
+import ContextRecipe from '../provider/ContextRecipe';
 import shareIcon from '../images/shareIcon.svg';
 // import heartColor from '../images/heartColor.svg';
+import ingredientRecie from '../api/IngredientRecie';
 
 function ProgressoComidas() {
-  const [resultApiID] = useState({});
-  const [verify, setVerify] = useState([]);
-  const [ingredients] = useState([]);
+  const { resultApiID } = useContext(ContextRecipe);
+  // const [verify, setVerify] = useState([]);
+  console.log(ingredientRecie());
 
   // botão de verificação de receitas
-  function handleClickVerify(index) {
-    setVerify(verify.includes(index)
-      ? verify.filter((check) => check !== index) : [index, ...verify]);
-  }
+  // function handleClickVerify(index) {
+  //   setVerify(verify.includes(index)
+  //     ? verify.filter((check) => check !== index) : [index, ...verify]);
+  // }
 
   return (
     <>
@@ -44,11 +46,26 @@ function ProgressoComidas() {
       />
 
       {/* texto da categoria */}
-      <h5 data-testid="recipe-category">{resultApiID.strAlcoholic ? resultApiID.strAlcoholic : resultApiID.strCategory}</h5>
+      <h5
+        data-testid="recipe-category"
+      >
+        {resultApiID.strAlcoholic ? resultApiID.strAlcoholic : resultApiID.strCategory}
+
+      </h5>
 
       {/* verificação de ingredientes  -data-testid=${index}-ingredient-step */}
       <h2>Ingredientes</h2>
-      {ingredients.map((ingredient, index) => (
+
+      {ingredientRecie().map((ingre, index) => (
+        <li
+          key={ index }
+          data-testid={ `${index}-ingredient-name-and-measure` }
+        >
+          {ingre.ingredient}
+          {ingre.measure}
+        </li>))}
+
+      {/* {ingredientRecie().map((ingredient, index) => (
         <div
           key={ index }
           data-testid={ `${index}-ingredient-step` }
@@ -63,7 +80,7 @@ function ProgressoComidas() {
           />
           <label htmlFor={ ingredient }>{ ingredient }</label>
         </div>
-      ))}
+      ))} */}
 
       {/* texto da categoria */}
       <h2>Instruções</h2>
@@ -72,7 +89,9 @@ function ProgressoComidas() {
         data-testid="finish-recipe-btn"
         label="Finalizar a Receita"
         type="button"
-      />
+      >
+        Finalizar Receita
+      </button>
 
       {/* botão para finalizar */}
       <button

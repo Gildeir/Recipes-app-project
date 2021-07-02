@@ -1,6 +1,9 @@
-import React, { /* useContext, */ useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Carousel } from 'react-bootstrap';
+import ContextRecipe from '../provider/ContextRecipe';
+// import RecomendationFood from '../components/RecomendationFood';
 // import { Link } from 'react-router-dom';
 // import ContextRecipe from '../provider/ContextRecipe';
 import shareIcon from '../images/shareIcon.svg';
@@ -10,11 +13,12 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../css/barraRolagem.css';
 
 function DetalhesComidas(props) {
+  const { resultApiID, setResultApiID } = useContext(ContextRecipe);
   const { match: { params: { id } } } = props;
   const history = useHistory();
   const [heartColor, setHeartColor] = useState(whiteHeartIcon);
-  const [resultApiID, setResultApiID] = useState({});
   const [recomandation, setRecomandation] = useState([]);
+
   const changeColorHeart = () => {
     if (heartColor === blackHeartIcon) {
       setHeartColor(whiteHeartIcon);
@@ -95,16 +99,34 @@ function DetalhesComidas(props) {
         data-testid="video"
         title="YouTube video player"
       />
-      <ol className="barraRolagem">
+
+      <Carousel>
         {recomandation.slice(0, six).map((drink, index) => (
-          <li key={ index } data-testid={ `${index}-recomendation-card` }>
-            <img src={ drink.strDrinkThumb } width="50px" alt="foto comida RECOMENDADA" />
+          <Carousel.Item key={ index } data-testid={ `${index}-recomendation-card` }>
+            <img
+              className="carousel_image"
+              src={ drink.strDrinkThumb }
+              width="50px"
+              alt="foto comida RECOMENDADA"
+            />
             <p>{drink.strAlcoholic}</p>
             <p data-testid={ `${index}-recomendation-title` }>{drink.strDrink}</p>
-          </li>))}
-      </ol>
-      {/* data-testid="favorite-btn */}
+
+            <img
+              className="carousel_image"
+              src={ drink.strDrinkThumb }
+              width="50px"
+              alt="foto comida RECOMENDADA"
+            />
+            <p>{drink.strAlcoholic}</p>
+            <p data-testid={ `${index}-recomendation-title` }>{drink.strDrink}</p>
+
+            {/* <RecomendationFood key={ index } drink={ drink } /> */}
+          </Carousel.Item>))}
+      </Carousel>
+
       <button
+        className="start-recipe-btn"
         type="button"
         data-testid="start-recipe-btn"
         label="Iniciar Receita"
