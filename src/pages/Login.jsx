@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Button, Form } from 'react-bootstrap';
 import ContextRecipe from '../provider/ContextRecipe';
+
+import '../css/login.css';
 
 function Login() {
   const { login: { email, password }, setLogin } = useContext(ContextRecipe);
@@ -36,37 +39,47 @@ function Login() {
   };
 
   return (
-    <section>
-      <form>
-        <label htmlFor="email">
-          <input
+    <section className="container-login100">
+      <Form>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>E-mail</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Digite seu e-mail"
             name="email"
-            type="text"
             data-testid="email-input"
             onChange={ (event) => setLogin({ email: event.target.value, password }) }
-            placeholder="Email"
           />
-        </label>
-        <label htmlFor="password">
-          <input
-            name="password"
+          <Form.Text className="text-muted">
+            Não compartilhe seu e-mail e senha.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Senha</Form.Label>
+          <Form.Control
             type="password"
+            placeholder="Digite sua senha"
+            name="password"
             data-testid="password-input"
             onChange={ (event) => setLogin({ password: event.target.value, email }) }
-            placeholder="password"
           />
-        </label>
+        </Form.Group>
+        <Form.Group controlId="formBasicCheckbox">
+          <Form.Check type="checkbox" label="Check me out" />
+        </Form.Group>
         <Link to="/comidas">
-          <button
-            type="button"
+          <Button
+            variant="primary"
+            type="login"
             data-testid="login-submit-btn"
             disabled={ buttonAvaliable() }
             onClick={ () => RedirectAndLocal() }
           >
             Login
-          </button>
+          </Button>
         </Link>
-      </form>
+      </Form>
     </section>
   );
 }
