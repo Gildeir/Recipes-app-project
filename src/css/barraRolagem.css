@@ -1,0 +1,35 @@
+.barraRolagem {
+  display: flex;
+  overflow-x: scroll;
+  padding: 0;
+  width: 170px;
+}
+
+.barraRolagem li {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 10px;
+}
+
+.carousel-control-prev-icon {
+  background-color: black;
+  margin-right: 0;
+}
+
+.carousel_image {
+  text-align: center;
+  width: 20%;
+}
+
+.start-recipe-btn {
+  bottom: 0;
+  margin-left: 10%;
+  position: fixed;
+  width: 80%;
+}
+
+.carousel-control-next-icon {
+  background-color: black;
+}

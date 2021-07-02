@@ -32,8 +32,8 @@ function Header() {
     setItemDigitado(value);
     if (userClick === 'Primeira letra' && itemDigitado.length > 0) {
       console.log('entrou no if');
-      // eslint-disable-next-line no-alert
-      alert('Sua busca deve conter somente 1 (um) caracter');
+      
+      global.alert('Sua busca deve conter somente 1 (um) caracter');
     }
   };
   console.log(apiDataDrink);
@@ -41,12 +41,12 @@ function Header() {
     await searchAPI();
     if (apiDataFood || apiDataDrink === null) {
       console.log('entrei no if do null');
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
   };
 
   return (
-    /* - Tem os data-testids `profile-top-btn`, `page-title` e `search-top-btn` */
+    
     <header className="header_bar">
       <section>
         <Link to="/perfil">
@@ -117,7 +117,10 @@ function Header() {
           data-testid="exec-search-btn"
           label="Buscar"
           onClick={ () => alertZeroFound() }
-        />
+        >
+          Buscar
+        </Button>
+
       </section>
     </header>
   );
