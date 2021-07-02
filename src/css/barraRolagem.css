@@ -1,0 +1,14 @@
+.barraRolagem {
+  display: flex;
+  overflow-x: scroll;
+  padding: 0;
+  width: 170px;
+}
+
+.barraRolagem li {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 10px;
+}

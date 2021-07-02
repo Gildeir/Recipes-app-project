@@ -1,4 +1,5 @@
 import React, { /* useContext, */ useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // import { Link } from 'react-router-dom';
 // import ContextRecipe from '../provider/ContextRecipe';
@@ -6,8 +7,11 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
+import '../css/barraRolagem.css';
+
 function DetalhesComidas(props) {
   const { match: { params: { id } } } = props;
+  const history = useHistory();
   const [heartColor, setHeartColor] = useState(whiteHeartIcon);
   const [resultApiID, setResultApiID] = useState({});
   const [recomandation, setRecomandation] = useState([]);
@@ -50,6 +54,8 @@ function DetalhesComidas(props) {
     { ingredient: resultApiID.strIngredient19, measure: resultApiID.strMeasure19 },
     { ingredient: resultApiID.strIngredient20, measure: resultApiID.strMeasure20 }];
 
+  const historyURL = () => (history.push(`${history.location.pathname}/in-progress`));
+
   return (
     <section>
       <p data-testid="page-title">Detalhe Comida</p>
@@ -89,7 +95,7 @@ function DetalhesComidas(props) {
         data-testid="video"
         title="YouTube video player"
       />
-      <ol>
+      <ol className="barraRolagem">
         {recomandation.slice(0, six).map((drink, index) => (
           <li key={ index } data-testid={ `${index}-recomendation-card` }>
             <img src={ drink.strDrinkThumb } width="50px" alt="foto comida RECOMENDADA" />
@@ -98,7 +104,14 @@ function DetalhesComidas(props) {
           </li>))}
       </ol>
       {/* data-testid="favorite-btn */}
-      <button type="button" data-testid="start-recipe-btn">INICIAR RECEITA</button>
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        label="Iniciar Receita"
+        onClick={ historyURL }
+      >
+        INICIAR RECEITA
+      </button>
     </section>
 
   );
