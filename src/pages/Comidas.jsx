@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ContextRecipe from '../provider/ContextRecipe';
@@ -10,8 +10,9 @@ function Comidas() {
     categoryBtn,
     itemDigitado,
     setItemDigitado,
+    setApiDataFood,
   } = useContext(ContextRecipe);
-
+  const history = useHistory();
   const [dataCategory, setDataCategory] = useState([]);
 
   useEffect(() => {
@@ -28,10 +29,66 @@ function Comidas() {
     setItemDigitado(value);
   }
 
+  const alarm = () => {
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+    setApiDataFood([]);
+  };
+
+  const renderItens = () => {
+    if (dataCategory === null) {
+      return (
+        apiDataFood.map((iten, index) => (
+          <li
+            data-testid={ `${index}-recipe-card` }
+            key={ index }
+          >
+            <div>
+              <Link to={ `/comidas/${iten.idMeal}` }>
+                <img
+                  data-testid={ `${index}-card-img` }
+                  src={ iten.strMealThumb }
+                  width="50px"
+                  alt="Food"
+                />
+                <p data-testid={ `${index}-card-name` }>{ iten.strMeal }</p>
+              </Link>
+            </div>
+          </li>))
+      );
+    }
+    return (
+      dataCategory.map((item, index) => (
+        <li
+          data-testid={ `${index}-recipe-card` }
+          key={ index }
+        >
+          <div>
+            <Link to={ `/comidas/${item.idMeal}` }>
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ item.strMealThumb }
+                width="50px"
+                alt="Food"
+              />
+              <p data-testid={ `${index}-card-name` }>{ item.strMeal }</p>
+            </Link>
+          </div>
+        </li>))
+    );
+  };
+
+  const direcionar = () => {
+    if (apiDataFood === null) {
+      return null;
+    }
+    if (apiDataFood.length === 1) {
+      return history.push(`comidas/${apiDataFood[0].idMeal}`);
+    }
+  };
+
   return (
     <>
       <Header dataCategory={ dataCategory } />
-      { console.log(categoryBtn)}
       <div>
         { Object.values(categoryBtn).map((category) => (
           <button
@@ -56,41 +113,8 @@ function Comidas() {
         </button>
       </div>
       <ol>
-        {dataCategory === null
-          ? apiDataFood.map((iten, index) => (
-            <li
-              data-testid={ `${index}-recipe-card` }
-              key={ index }
-            >
-              <div>
-                <Link to={ `/comidas/${iten.idMeal}` }>
-                  <img
-                    data-testid={ `${index}-card-img` }
-                    src={ iten.strMealThumb }
-                    width="50px"
-                    alt="Food"
-                  />
-                  <p data-testid={ `${index}-card-name` }>{ iten.strMeal }</p>
-                </Link>
-              </div>
-            </li>))
-          : dataCategory.map((item, index) => (
-            <li
-              data-testid={ `${index}-recipe-card` }
-              key={ index }
-            >
-              <div>
-                <Link to={ `/comidas/${item.idMeal}` }>
-                  <img
-                    data-testid={ `${index}-card-img` }
-                    src={ item.strMealThumb }
-                    width="50px"
-                    alt="Food"
-                  />
-                  <p data-testid={ `${index}-card-name` }>{ item.strMeal }</p>
-                </Link>
-              </div>
-            </li>))}
+        {apiDataFood === null ? alarm() : renderItens()}
+        {direcionar()}
       </ol>
       <Footer />
     </>

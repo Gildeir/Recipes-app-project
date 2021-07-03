@@ -6,7 +6,7 @@ function OrigemComidas() {
   return (
     <>
       <Header />
-      <p data-testid="page-title">Origem Comida</p>
+      <p data-testid="page-title">Explorar Origem</p>
       <Footer />
     </>
   );

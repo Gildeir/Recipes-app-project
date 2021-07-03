@@ -56,7 +56,7 @@ function DetalhesBebidas(props) {
 
   return (
     <section>
-      <p data-testid="page-title">DetalhesBebidas</p>
+      <h3>DetalhesBebidas</h3>
       <img
         src={ resultApiID.strDrinkThumb }
         data-testid="recipe-photo"
@@ -95,6 +95,15 @@ function DetalhesBebidas(props) {
               key={ index }
               data-testid={ `${index}-recomendation-card` }
             >
+              <img
+                className="carousel_image"
+                src={ drink.strMealThumb }
+                width="50px"
+                alt="foto comida RECOMENDADA"
+              />
+              <p>{drink.strArea}</p>
+              <p data-testid={ `${index}-recomendation-title` }>{drink.strMeal}</p>
+
               <img
                 className="carousel_image"
                 src={ drink.strMealThumb }

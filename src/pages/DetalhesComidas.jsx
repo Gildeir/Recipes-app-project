@@ -62,7 +62,7 @@ function DetalhesComidas(props) {
 
   return (
     <section>
-      <p data-testid="page-title">Detalhe Comida</p>
+      <h3>Detalhe Comida</h3>
       <img
         src={ resultApiID.strMealThumb }
         data-testid="recipe-photo"
