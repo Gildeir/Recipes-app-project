@@ -33,7 +33,7 @@ function DetalhesComidas(props) {
       .then((response) => response.json()).then(({ drinks }) => setRecomandation(drinks));
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
       .then((result) => result.json()).then(({ meals }) => setResultApiID(meals[0]));
-  }, []);
+  }, [id, setResultApiID]);
 
   const six = 6;
   const ingredients = [

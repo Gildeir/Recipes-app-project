@@ -30,7 +30,7 @@ function Comidas() {
   }
 
   const alarm = () => {
-    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     setApiDataFood([]);
   };
 

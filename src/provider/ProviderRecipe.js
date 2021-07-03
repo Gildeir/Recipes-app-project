@@ -38,7 +38,7 @@ function RecipeProvider({ children }) {
           setCategoryBtn(result);
         }).catch(() => setCategoryBtn(null));
     }
-  }, []);
+  }, [location.pathname]);
 
   const searchAPI = () => {
     if (location.pathname === '/comidas') {

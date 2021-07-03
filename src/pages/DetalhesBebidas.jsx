@@ -32,7 +32,7 @@ function DetalhesBebidas(props) {
       .then((response) => response.json()).then(({ meals }) => setRecomandation(meals));
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
       .then((result) => result.json()).then(({ drinks }) => setResultApiID(drinks[0]));
-  }, []);
+  }, [id]);
 
   const six = 6;
   const ingredients = [
