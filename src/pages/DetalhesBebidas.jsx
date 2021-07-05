@@ -16,22 +16,55 @@ function DetalhesBebidas(props) {
   const [heartColor, setHeartColor] = useState(whiteHeartIcon);
   const [resultApiID, setResultApiID] = useState({});
   const [recomandation, setRecomandation] = useState([]);
-  console.log(recomandation);
 
-  // JSON.parse(localStorage.getItem('state') localStorage.setItem('token', JSON.stringify(response.token));
-  console.log(resultApiID);
+  useEffect(() => {
+    const getLocalFavUse = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (getLocalFavUse) {
+      const filterLocal = getLocalFavUse.filter((item) => item.id === resultApiID.idDrink);
+      console.log(filterLocal);
+      if (filterLocal.length === 1) {
+        setHeartColor(blackHeartIcon);
+      }
+    }
+  }, [resultApiID]);
+
   const changeColorHeart = () => {
+    const getLocalFav = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (heartColor === blackHeartIcon) {
       setHeartColor(whiteHeartIcon);
-      // remover
+      const filterLocal = getLocalFav.filter((itens) => itens.id !== resultApiID.idDrink);
+      if (getLocalFav.length === 1) {
+        localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+      } else {
+        localStorage.setItem('favoriteRecipes', JSON.stringify(filterLocal));
+      }
     }
     if (heartColor === whiteHeartIcon) {
       setHeartColor(blackHeartIcon);
-      // add
-      // const getLocalFav = JSON.parse(localStorage.getItem('favoriteRecipes')
-      // localStorage.setItem('favoriteRecipes', JSON.stringify(
-      //   [...getLocalFav, { id: resultApiID.idDrink , type: bebida, area, category: resultApiID.strCategory, alcoholicOrNot: resultApiID, name, image, doneDate, tags } ])
-      //   );
+      if (getLocalFav === null || getLocalFav === []) {
+        localStorage.setItem('favoriteRecipes', JSON.stringify(
+          [{ id: resultApiID.idDrink,
+            type: 'bebida',
+            area: '',
+            category: resultApiID.strCategory,
+            alcoholicOrNot: resultApiID.strAlcoholic,
+            name: resultApiID.strDrink,
+            image: resultApiID.strDrinkThumb,
+          }],
+        ));
+      } else {
+        localStorage.setItem('favoriteRecipes', JSON.stringify(
+          [...getLocalFav,
+            { id: resultApiID.idDrink,
+              type: 'bebida',
+              area: '',
+              category: resultApiID.strCategory,
+              alcoholicOrNot: resultApiID.strAlcoholic,
+              name: resultApiID.strDrink,
+              image: resultApiID.strDrinkThumb,
+            }],
+        ));
+      }
     }
   };
 

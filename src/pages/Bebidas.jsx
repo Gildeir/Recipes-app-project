@@ -28,6 +28,8 @@ function Bebidas() {
   async function handleClick({ value }) {
     console.log(value);
     console.log(itemDigitado);
+    console.log(value);
+    console.log(itemDigitado);
     setItemDigitado(value);
   }
 
