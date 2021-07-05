@@ -14,11 +14,15 @@ function receitasProntas() {
 function renderizaReceitas(data, index) {
   if (data.type === 'comida') {
     return (
-      <p
-        data-testid={ `${index}-horizontal-top-text` }
-      >
-        { `${data.area} - ${data.category}` }
-      </p>
+      <>
+        <p
+          data-testid={ `${index}-horizontal-top-text` }
+        >
+          { `${data.area} - ${data.category}` }
+        </p>
+        <p data-testid={ `${index}-${data.tags[0]}-horizontal-tag` }>{ data.tags[0]}</p>
+        <p data-testid={ `${index}-${data.tags[1]}-horizontal-tag` }>{ data.tags[1]}</p>
+      </>
     );
   }
   if (data.type === 'bebida') {
@@ -75,7 +79,7 @@ function ReceitasFeitas() {
         type="button"
         data-testid="filter-by-drink-btn"
         onClick={ () => setListaReceitas(
-          receitasProntas().filter((data) => data.type === 'bebidas'),
+          receitasProntas().filter((data) => data.type === 'bebida'),
         ) }
       >
         Drinks
@@ -90,14 +94,14 @@ function ReceitasFeitas() {
             alt="imagem da receita"
             name={ receita.name }
             width="100%"
-            onClick={ () => history.pushState(`${receita.type}s/${receita.id}`) }
+            onClick={ () => history.push(`${receita.type}s/${receita.id}`) }
           />
 
           <a
             href={ `${receita.type}s/${receita.id}` }
             data-testid={ `${index}-horizontal-name` }
           >
-            {receita.name}
+            { receita.name }
           </a>
           <p data-testid={ `${index}-horizontal-done-date` }>{receita.doneDate}</p>
           {renderizaReceitas(receita, index)}
