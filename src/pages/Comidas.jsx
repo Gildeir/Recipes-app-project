@@ -90,7 +90,7 @@ function Comidas() {
     <>
       <Header dataCategory={ dataCategory } />
       <div>
-        { Object.values(categoryBtn).map((category) => (
+        { categoryBtn.map((category) => (
           <button
             data-testid={ `${category.strCategory}-category-filter` }
             key={ category.strCategory }

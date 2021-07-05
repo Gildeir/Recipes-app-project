@@ -18,12 +18,20 @@ function DetalhesBebidas(props) {
   const [recomandation, setRecomandation] = useState([]);
   console.log(recomandation);
 
+  // JSON.parse(localStorage.getItem('state') localStorage.setItem('token', JSON.stringify(response.token));
+  console.log(resultApiID);
   const changeColorHeart = () => {
     if (heartColor === blackHeartIcon) {
       setHeartColor(whiteHeartIcon);
+      // remover
     }
     if (heartColor === whiteHeartIcon) {
       setHeartColor(blackHeartIcon);
+      // add
+      // const getLocalFav = JSON.parse(localStorage.getItem('favoriteRecipes')
+      // localStorage.setItem('favoriteRecipes', JSON.stringify(
+      //   [...getLocalFav, { id: resultApiID.idDrink , type: bebida, area, category: resultApiID.strCategory, alcoholicOrNot: resultApiID, name, image, doneDate, tags } ])
+      //   );
     }
   };
 

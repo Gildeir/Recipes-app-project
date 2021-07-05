@@ -14,7 +14,7 @@ function RecipeProvider({ children }) {
   const [apiDataDrink, setApiDataDrink] = useState([]);
   const [userClick, setUserClick] = useState('');
   const [itemDigitado, setItemDigitado] = useState('');
-  const [categoryBtn, setCategoryBtn] = useState('');
+  const [categoryBtn, setCategoryBtn] = useState([]);
   const [resultApiID, setResultApiID] = useState({});
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function RecipeProvider({ children }) {
           const limite = 5;
           const result = meals.slice(0, limite);
           setCategoryBtn(result);
-        }).catch(() => setCategoryBtn(null));
+        });
     }
     // botôes de categoria bebidas
     if (location.pathname === '/bebidas') {
@@ -36,7 +36,7 @@ function RecipeProvider({ children }) {
           const limite = 5;
           const result = drinks.slice(0, limite);
           setCategoryBtn(result);
-        }).catch(() => setCategoryBtn(null));
+        });
     }
   }, [location.pathname]);
 
