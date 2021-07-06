@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 function ExplorarBebidas() {
   return (
     <>
+      <p data-testid="page-title">Explorar Bebidas</p>
       <Header title="Explorar Bebidas" />
       <button
         type="button"

@@ -85,21 +85,16 @@ function ProgressoComidas() {
       {/* texto da categoria */}
       <h2>Instruções</h2>
       <p data-testid="instructions">{resultApiID.strInstructions}</p>
+
+      {/* botão para finalizar */}
       <button
         data-testid="finish-recipe-btn"
         label="Finalizar a Receita"
         type="button"
+        onClick={ {} }
       >
         Finalizar Receita
       </button>
-
-      {/* botão para finalizar */}
-      <button
-        type="button"
-        data-testid="finish-recipe-btn"
-        label="Finalizar Receita"
-        onClick={ {} }
-      />
 
     </>
   );

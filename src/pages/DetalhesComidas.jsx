@@ -33,7 +33,7 @@ function DetalhesComidas(props) {
       .then((response) => response.json()).then(({ drinks }) => setRecomandation(drinks));
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
       .then((result) => result.json()).then(({ meals }) => setResultApiID(meals[0]));
-  }, []);
+  }, [id, setResultApiID]);
 
   const six = 6;
   const ingredients = [
@@ -62,7 +62,7 @@ function DetalhesComidas(props) {
 
   return (
     <section>
-      <p data-testid="page-title">Detalhe Comida</p>
+      <h3>Detalhe Comida</h3>
       <img
         src={ resultApiID.strMealThumb }
         data-testid="recipe-photo"

@@ -16,14 +16,55 @@ function DetalhesBebidas(props) {
   const [heartColor, setHeartColor] = useState(whiteHeartIcon);
   const [resultApiID, setResultApiID] = useState({});
   const [recomandation, setRecomandation] = useState([]);
-  console.log(recomandation);
+
+  useEffect(() => {
+    const getLocalFavUse = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (getLocalFavUse) {
+      const filterLocal = getLocalFavUse.filter((item) => item.id === resultApiID.idDrink);
+      console.log(filterLocal);
+      if (filterLocal.length === 1) {
+        setHeartColor(blackHeartIcon);
+      }
+    }
+  }, [resultApiID]);
 
   const changeColorHeart = () => {
+    const getLocalFav = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (heartColor === blackHeartIcon) {
       setHeartColor(whiteHeartIcon);
+      const filterLocal = getLocalFav.filter((itens) => itens.id !== resultApiID.idDrink);
+      if (getLocalFav.length === 1) {
+        localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+      } else {
+        localStorage.setItem('favoriteRecipes', JSON.stringify(filterLocal));
+      }
     }
     if (heartColor === whiteHeartIcon) {
       setHeartColor(blackHeartIcon);
+      if (getLocalFav === null || getLocalFav === []) {
+        localStorage.setItem('favoriteRecipes', JSON.stringify(
+          [{ id: resultApiID.idDrink,
+            type: 'bebida',
+            area: '',
+            category: resultApiID.strCategory,
+            alcoholicOrNot: resultApiID.strAlcoholic,
+            name: resultApiID.strDrink,
+            image: resultApiID.strDrinkThumb,
+          }],
+        ));
+      } else {
+        localStorage.setItem('favoriteRecipes', JSON.stringify(
+          [...getLocalFav,
+            { id: resultApiID.idDrink,
+              type: 'bebida',
+              area: '',
+              category: resultApiID.strCategory,
+              alcoholicOrNot: resultApiID.strAlcoholic,
+              name: resultApiID.strDrink,
+              image: resultApiID.strDrinkThumb,
+            }],
+        ));
+      }
     }
   };
 
@@ -32,7 +73,7 @@ function DetalhesBebidas(props) {
       .then((response) => response.json()).then(({ meals }) => setRecomandation(meals));
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
       .then((result) => result.json()).then(({ drinks }) => setResultApiID(drinks[0]));
-  }, []);
+  }, [id]);
 
   const six = 6;
   const ingredients = [
@@ -56,7 +97,7 @@ function DetalhesBebidas(props) {
 
   return (
     <section>
-      <p data-testid="page-title">DetalhesBebidas</p>
+      <h3>DetalhesBebidas</h3>
       <img
         src={ resultApiID.strDrinkThumb }
         data-testid="recipe-photo"
@@ -95,6 +136,15 @@ function DetalhesBebidas(props) {
               key={ index }
               data-testid={ `${index}-recomendation-card` }
             >
+              <img
+                className="carousel_image"
+                src={ drink.strMealThumb }
+                width="50px"
+                alt="foto comida RECOMENDADA"
+              />
+              <p>{drink.strArea}</p>
+              <p data-testid={ `${index}-recomendation-title` }>{drink.strMeal}</p>
+
               <img
                 className="carousel_image"
                 src={ drink.strMealThumb }

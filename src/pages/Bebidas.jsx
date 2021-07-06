@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ContextRecipe from '../provider/ContextRecipe';
@@ -10,11 +10,10 @@ function Bebidas() {
     categoryBtn,
     itemDigitado,
     setItemDigitado,
-    // setApiDataDrink,
+    setApiDataDrink,
   } = useContext(ContextRecipe);
-
+  const history = useHistory();
   const [drinkCategory, setDrinkCategory] = useState([]);
-  console.log(drinkCategory);
 
   useEffect(() => {
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${itemDigitado}`)
@@ -29,14 +28,73 @@ function Bebidas() {
   async function handleClick({ value }) {
     console.log(value);
     console.log(itemDigitado);
+    console.log(value);
+    console.log(itemDigitado);
     setItemDigitado(value);
   }
+
+  const renderItens = () => {
+    if (drinkCategory === null) {
+      return (
+        apiDataDrink.map((iten, index) => (
+          <li
+            data-testid={ `${index}-recipe-card` }
+            key={ index }
+          >
+            <div>
+              <Link to={ `/bebidas/${iten.idDrink}` }>
+                <img
+                  data-testid={ `${index}-card-img` }
+                  src={ iten.strDrinkThumb }
+                  width="50px"
+                  alt="drink"
+                />
+                <p data-testid={ `${index}-card-name` }>{ iten.strDrink }</p>
+              </Link>
+            </div>
+          </li>))
+      );
+    }
+    return (
+      drinkCategory.map((item, index) => (
+        <li
+          data-testid={ `${index}-recipe-card` }
+          key={ index }
+        >
+          <div>
+            <Link to={ `/bebidas/${item.idDrink}` }>
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ item.strDrinkThumb }
+                width="50px"
+                alt="drink"
+              />
+              <p data-testid={ `${index}-card-name` }>{ item.strDrink }</p>
+            </Link>
+          </div>
+        </li>))
+    );
+  };
+
+  const alarm = () => {
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    setApiDataDrink([]);
+  };
+
+  const direcionar = () => {
+    if (apiDataDrink === null) {
+      return null;
+    }
+    if (apiDataDrink.length === 1) {
+      return history.push(`bebidas/${apiDataDrink[0].idDrink}`);
+    }
+  };
 
   return (
     <>
       <Header />
       <div>
-        { Object.values(categoryBtn).map((category) => (
+        { categoryBtn.map((category) => (
           <button
             data-testid={ `${category.strCategory}-category-filter` }
             key={ category.strCategory }
@@ -61,41 +119,8 @@ function Bebidas() {
         </button>
       </div>
       <ol>
-        {drinkCategory === null
-          ? apiDataDrink.map((iten, index) => (
-            <li
-              data-testid={ `${index}-recipe-card` }
-              key={ index }
-            >
-              <div>
-                <Link to={ `/bebidas/${iten.idDrink}` }>
-                  <img
-                    data-testid={ `${index}-card-img` }
-                    src={ iten.strDrinkThumb }
-                    width="50px"
-                    alt="drink"
-                  />
-                  <p data-testid={ `${index}-card-name` }>{ iten.strDrink }</p>
-                </Link>
-              </div>
-            </li>))
-          : drinkCategory.map((item, index) => (
-            <li
-              data-testid={ `${index}-recipe-card` }
-              key={ index }
-            >
-              <div>
-                <Link to={ `/bebidas/${item.idDrink}` }>
-                  <img
-                    data-testid={ `${index}-card-img` }
-                    src={ item.strDrinkThumb }
-                    width="50px"
-                    alt="drink"
-                  />
-                  <p data-testid={ `${index}-card-name` }>{ item.strDrink }</p>
-                </Link>
-              </div>
-            </li>))}
+        {apiDataDrink === null ? alarm() : renderItens()}
+        {direcionar()}
       </ol>
       <Footer />
     </>

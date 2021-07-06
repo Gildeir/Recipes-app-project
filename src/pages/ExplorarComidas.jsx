@@ -10,6 +10,7 @@ Ao clicar no botão "Me Surpreenda!" da tela de explorar bebidas a rota muda par
   const history = useHistory();
   return (
     <>
+      <p data-testid="page-title">Explorar Comidas</p>
       <Header title="Explorar Comidas" />
       <button
         type="button"

@@ -6,7 +6,7 @@ function IngredientesBebidas() {
   return (
     <>
       <Header />
-      <p data-testid="page-title">Ingre beb</p>
+      <p data-testid="page-title">Explorar Ingredientes</p>
       <Footer />
     </>
   );
