@@ -1,8 +1,10 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function ExplorarBebidas() {
+  const history = useHistory();
   return (
     <>
       <p data-testid="page-title">Explorar Bebidas</p>
@@ -11,7 +13,7 @@ function ExplorarBebidas() {
         type="button"
         data-testid="explore-by-ingredient"
         label="Por Ingredientes"
-        onClick={ {} }
+        onClick={ () => history.push('bebidas/ingredientes') }
       >
         Por Ingredientes
       </button>

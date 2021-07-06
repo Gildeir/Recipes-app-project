@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 function Perfil() {
   const [user] = useState(JSON.parse(localStorage.getItem('user')) || '{}');
-  const historia = useHistory();
+  const history = useHistory();
   return (
     <>
       <Header title="Perfil" disableBtn />
@@ -18,22 +18,28 @@ function Perfil() {
         label="Receitas Feitas"
         data-testid="profile-done-btn"
         type="button"
-        onClick={ () => historia.push('/receitas-feitas') }
-      />
+        onClick={ () => history.push('/receitas-feitas') }
+      >
+        Receitas Feitas
+      </button>
 
       <button
         label="Receitas Favoritas"
         data-testid="profile-favorite-btn"
         type="button"
-        onClick={ () => historia.push('/receitas-favoritas') }
-      />
+        onClick={ () => history.push('/receitas-favoritas') }
+      >
+        Receitas Favoritas
+      </button>
 
       <button
         label="Sair"
         data-testid="profile-logout-btn"
         type="button"
-        onClick={ () => localStorage.clear() || historia.push('/') }
-      />
+        onClick={ () => localStorage.clear() || history.push('/') }
+      >
+        Sair
+      </button>
 
       <Footer />
     </>

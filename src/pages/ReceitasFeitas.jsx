@@ -120,6 +120,4 @@ function ReceitasFeitas() {
   );
 }
 
-// progressRecipes
-
 export default ReceitasFeitas;

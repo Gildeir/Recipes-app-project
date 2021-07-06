@@ -1,4 +1,4 @@
-import React, { /* useContext, */ useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Carousel } from 'react-bootstrap';
@@ -6,131 +6,49 @@ import { Carousel } from 'react-bootstrap';
 // import ContextRecipe from '../provider/ContextRecipe';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-
+import ContextRecipe from '../provider/ContextRecipe';
 import '../css/barraRolagem.css';
-
-const changeColorHeart = (heartColor, setHeartColor, resultApiID) => {
-  const getLocalFav = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  if (heartColor === blackHeartIcon) {
-    setHeartColor(whiteHeartIcon);
-    const filterLocal = getLocalFav.filter((itens) => itens.id !== resultApiID.idDrink);
-    if (getLocalFav.length === 1) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(filterLocal));
-    }
-  }
-  if (heartColor === whiteHeartIcon) {
-    setHeartColor(blackHeartIcon);
-    if (getLocalFav === null || getLocalFav === []) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(
-        [{ id: resultApiID.idDrink,
-          type: 'bebida',
-          area: '',
-          category: resultApiID.strCategory,
-          alcoholicOrNot: resultApiID.strAlcoholic,
-          name: resultApiID.strDrink,
-          image: resultApiID.strDrinkThumb,
-        }],
-      ));
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(
-        [...getLocalFav,
-          { id: resultApiID.idDrink,
-            type: 'bebida',
-            area: '',
-            category: resultApiID.strCategory,
-            alcoholicOrNot: resultApiID.strAlcoholic,
-            name: resultApiID.strDrink,
-            image: resultApiID.strDrinkThumb,
-          }],
-      ));
-    }
-  }
-};
 
 function DetalhesBebidas(props) {
   const history = useHistory();
   const { match: { params: { id } } } = props;
-  const [heartColor, setHeartColor] = useState(whiteHeartIcon);
-  const [resultApiID, setResultApiID] = useState({});
   const [recomandation, setRecomandation] = useState([]);
+  const { heartColor, setHeartColor, ApiIdDetalhe, setApiIdDetalhe, funcHeartColor } = useContext(ContextRecipe);
 
   useEffect(() => {
     const getLocalFavUse = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (getLocalFavUse) {
-      const filtrLocal = getLocalFavUse.filter((item) => item.id === resultApiID.idDrink);
+      const filtrLocal = getLocalFavUse.filter((item) => item.id === ApiIdDetalhe.idDrink);
       if (filtrLocal.length === 1) {
         setHeartColor(blackHeartIcon);
       }
     }
-  }, [resultApiID]);
-
-  // const changeColorHeart = () => {
-  //   const getLocalFav = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  //   if (heartColor === blackHeartIcon) {
-  //     setHeartColor(whiteHeartIcon);
-  //     const filterLocal = getLocalFav.filter((itens) => itens.id !== resultApiID.idDrink);
-  //     if (getLocalFav.length === 1) {
-  //       localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-  //     } else {
-  //       localStorage.setItem('favoriteRecipes', JSON.stringify(filterLocal));
-  //     }
-  //   }
-  //   if (heartColor === whiteHeartIcon) {
-  //     setHeartColor(blackHeartIcon);
-  //     if (getLocalFav === null || getLocalFav === []) {
-  //       localStorage.setItem('favoriteRecipes', JSON.stringify(
-  //         [{ id: resultApiID.idDrink,
-  //           type: 'bebida',
-  //           area: '',
-  //           category: resultApiID.strCategory,
-  //           alcoholicOrNot: resultApiID.strAlcoholic,
-  //           name: resultApiID.strDrink,
-  //           image: resultApiID.strDrinkThumb,
-  //         }],
-  //       ));
-  //     } else {
-  //       localStorage.setItem('favoriteRecipes', JSON.stringify(
-  //         [...getLocalFav,
-  //           { id: resultApiID.idDrink,
-  //             type: 'bebida',
-  //             area: '',
-  //             category: resultApiID.strCategory,
-  //             alcoholicOrNot: resultApiID.strAlcoholic,
-  //             name: resultApiID.strDrink,
-  //             image: resultApiID.strDrinkThumb,
-  //           }],
-  //       ));
-  //     }
-  //   }
-  // };
+  }, [ApiIdDetalhe, setHeartColor]);
 
   useEffect(() => {
     fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
       .then((response) => response.json()).then(({ meals }) => setRecomandation(meals));
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
-      .then((result) => result.json()).then(({ drinks }) => setResultApiID(drinks[0]));
-  }, [id]);
+      .then((result) => result.json()).then(({ drinks }) => setApiIdDetalhe(drinks[0]));
+  }, [id, setApiIdDetalhe]);
 
   const six = 6;
   const ingredients = [
-    { ingredient: resultApiID.strIngredient1, measure: resultApiID.strMeasure1 },
-    { ingredient: resultApiID.strIngredient2, measure: resultApiID.strMeasure2 },
-    { ingredient: resultApiID.strIngredient3, measure: resultApiID.strMeasure3 },
-    { ingredient: resultApiID.strIngredient4, measure: resultApiID.strMeasure4 },
-    { ingredient: resultApiID.strIngredient5, measure: resultApiID.strMeasure5 },
-    { ingredient: resultApiID.strIngredient6, measure: resultApiID.strMeasure6 },
-    { ingredient: resultApiID.strIngredient7, measure: resultApiID.strMeasure7 },
-    { ingredient: resultApiID.strIngredient8, measure: resultApiID.strMeasure8 },
-    { ingredient: resultApiID.strIngredient9, measure: resultApiID.strMeasure9 },
-    { ingredient: resultApiID.strIngredient10, measure: resultApiID.strMeasure10 },
-    { ingredient: resultApiID.strIngredient11, measure: resultApiID.strMeasure11 },
-    { ingredient: resultApiID.strIngredient12, measure: resultApiID.strMeasure12 },
-    { ingredient: resultApiID.strIngredient13, measure: resultApiID.strMeasure13 },
-    { ingredient: resultApiID.strIngredient14, measure: resultApiID.strMeasure14 },
-    { ingredient: resultApiID.strIngredient15, measure: resultApiID.strMeasure15 }];
+    { ingredient: ApiIdDetalhe.strIngredient1, measure: ApiIdDetalhe.strMeasure1 },
+    { ingredient: ApiIdDetalhe.strIngredient2, measure: ApiIdDetalhe.strMeasure2 },
+    { ingredient: ApiIdDetalhe.strIngredient3, measure: ApiIdDetalhe.strMeasure3 },
+    { ingredient: ApiIdDetalhe.strIngredient4, measure: ApiIdDetalhe.strMeasure4 },
+    { ingredient: ApiIdDetalhe.strIngredient5, measure: ApiIdDetalhe.strMeasure5 },
+    { ingredient: ApiIdDetalhe.strIngredient6, measure: ApiIdDetalhe.strMeasure6 },
+    { ingredient: ApiIdDetalhe.strIngredient7, measure: ApiIdDetalhe.strMeasure7 },
+    { ingredient: ApiIdDetalhe.strIngredient8, measure: ApiIdDetalhe.strMeasure8 },
+    { ingredient: ApiIdDetalhe.strIngredient9, measure: ApiIdDetalhe.strMeasure9 },
+    { ingredient: ApiIdDetalhe.strIngedient10, measure: ApiIdDetalhe.strMeasure10 },
+    { ingredient: ApiIdDetalhe.strIngedient11, measure: ApiIdDetalhe.strMeasure11 },
+    { ingredient: ApiIdDetalhe.strIngredient12, measure: ApiIdDetalhe.strMeasure12 },
+    { ingredient: ApiIdDetalhe.strIngredient13, measure: ApiIdDetalhe.strMeasure13 },
+    { ingredient: ApiIdDetalhe.strIngredient14, measure: ApiIdDetalhe.strMeasure14 },
+    { ingredient: ApiIdDetalhe.strIngredient15, measure: ApiIdDetalhe.strMeasure15 }];
 
   const historyURL = () => (history.push(`${history.location.pathname}/in-progress`));
 
@@ -138,23 +56,23 @@ function DetalhesBebidas(props) {
     <section>
       <h3>DetalhesBebidas</h3>
       <img
-        src={ resultApiID.strDrinkThumb }
+        src={ ApiIdDetalhe.strDrinkThumb }
         data-testid="recipe-photo"
         alt="foto bebida"
         width="100px"
       />
-      <p data-testid="recipe-title">{resultApiID.strDrink}</p>
+      <p data-testid="recipe-title">{ApiIdDetalhe.strDrink}</p>
       <img src={ shareIcon } alt="share" data-testid="share-btn" />
       <input
         type="image"
         label="favorite"
         src={ heartColor }
-        onClick={ () => changeColorHeart(heartColor, setHeartColor, resultApiID) }
+        onClick={ () => funcHeartColor(heartColor, setHeartColor, ApiIdDetalhe, id) }
         alt="heart"
         width="25px"
         data-testid="favorite-btn"
       />
-      <p data-testid="recipe-category">{resultApiID.strAlcoholic}</p>
+      <p data-testid="recipe-category">{ApiIdDetalhe.strAlcoholic}</p>
       <ol>
         {ingredients.map((ingre, index) => (
           <li
@@ -165,7 +83,7 @@ function DetalhesBebidas(props) {
             {ingre.measure}
           </li>))}
       </ol>
-      <p data-testid="instructions">{resultApiID.strInstructions}</p>
+      <p data-testid="instructions">{ApiIdDetalhe.strInstructions}</p>
 
       <Carousel>
         {!recomandation

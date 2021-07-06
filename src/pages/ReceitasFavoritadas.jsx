@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
+// import Header from '../components/Header';
 
 function ReceitasFavoritadas() {
-  // const localGetFav = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const localGetFav = JSON.parse(localStorage.getItem('favoriteRecipes'));
   return (
     <>
-      <header title="Receitas Favoritas" />
       <Link to="/perfil">
         <input
           type="image"
@@ -43,6 +44,27 @@ function ReceitasFavoritadas() {
       >
         Drinks
       </button>
+      <ol>
+        {localGetFav.map((item, index) => (
+          <li key={ index }>
+            <img width="50 px" alt="recipe-img" src={ item.image } />
+            <p>{ item.name }</p>
+            <p>{ item.alcoholicOrNot }</p>
+            <input
+              type="image"
+              src={ shareIcon }
+              alt="share"
+              data-testid={ `${index}-horizontal-share-btn` }
+              onClick={ {} }
+            />
+            <button
+              type="button"
+              onClick={ {} }
+            >
+              Desfavoritar
+            </button>
+          </li>))}
+      </ol>
     </>
   );
 }
