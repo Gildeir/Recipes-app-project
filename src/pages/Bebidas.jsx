@@ -14,6 +14,7 @@ function Bebidas() {
   } = useContext(ContextRecipe);
   const history = useHistory();
   const [drinkCategory, setDrinkCategory] = useState([]);
+  const [select, setSelect] = useState(false);
 
   useEffect(() => {
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${itemDigitado}`)
@@ -26,13 +27,29 @@ function Bebidas() {
   }, [itemDigitado, setDrinkCategory]);
 
   async function handleClick({ value }) {
-    console.log(value);
-    console.log(itemDigitado);
-    console.log(value);
-    console.log(itemDigitado);
-    setItemDigitado(value);
+    if (value === itemDigitado) {
+      setSelect(false);
+      setItemDigitado('');
+    }
+    if (select === false) {
+      setSelect(true);
+      setItemDigitado(value);
+    }
   }
 
+  useEffect(() => {
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+      .then((response) => response.json())
+      .then(({ drinks }) => {
+        const limite = 12;
+        const result = drinks.slice(0, limite);
+        setApiDataDrink(result);
+      }).catch(() => setApiDataDrink(null));
+  }, [setApiDataDrink, itemDigitado]);
+
+  function handleAllButton() {
+    setItemDigitado('');
+  }
   const renderItens = () => {
     if (drinkCategory === null) {
       return (
@@ -113,7 +130,7 @@ function Bebidas() {
           type="button"
           name="all"
           value="all"
-          onClick={ ({ target }) => handleClick(target) }
+          onClick={ () => handleAllButton() }
         >
           All
         </button>

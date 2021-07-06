@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import ContextRecipe from './ContextRecipe';
-import { Comidas, Bebidas } from './ApiFunctions';
+import { Comidas, Bebidas, changeColorHeart } from './ApiFunctions';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 function RecipeProvider({ children }) {
+  const [heartColor, setHeartColor] = useState(whiteHeartIcon);
+  const [ApiIdDetalhe, setApiIdDetalhe] = useState({});
   const location = useLocation();
   const [login, setLogin] = useState({
     email: '',
@@ -63,6 +67,10 @@ function RecipeProvider({ children }) {
     }
   };
 
+  const funcHeartColor = (heartColor, setHeartColor, ApiIdDetalhe, id) => {
+    changeColorHeart(heartColor, setHeartColor, ApiIdDetalhe, id);
+  }
+
   const values = {
     login,
     setLogin,
@@ -79,6 +87,11 @@ function RecipeProvider({ children }) {
     setResultApiID,
     setApiDataFood,
     setApiDataDrink,
+    heartColor,
+    setHeartColor,
+    ApiIdDetalhe,
+    setApiIdDetalhe,
+    funcHeartColor,
   };
 
   return (

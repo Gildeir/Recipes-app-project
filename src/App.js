@@ -11,6 +11,7 @@ import DetalhesComidas from './pages/DetalhesComidas';
 import DetalhesBebidas from './pages/DetalhesBebidas';
 import ProgressoComidas from './pages/ProgressoComidas';
 import ProgressoBebidas from './pages/ProgressoBebidas';
+import NotFound from './pages/NotFound';
 import Explorar from './pages/Explorar';
 import ExplorarComidas from './pages/ExplorarComidas';
 import ExplorarBebidas from './pages/ExplorarBebidas';
@@ -41,6 +42,7 @@ function App() {
       <Route path="/bebidas/:id/in-progress" component={ ProgressoBebidas } />
       <Route exact path="/explorar" component={ Explorar } />
       <Route exact path="/explorar/comidas" component={ ExplorarComidas } />
+      <Route path="/explorar/bebidas/area" component={ NotFound } />
       <Route exact path="/explorar/bebidas" component={ ExplorarBebidas } />
       <Route path="/explorar/bebidas/ingredientes" component={ IngredientesBebidas } />
       <Route path="/explorar/comidas/ingredientes" component={ IngredientesComidas } />

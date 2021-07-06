@@ -13,50 +13,47 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../css/barraRolagem.css';
 
 function DetalhesComidas(props) {
-  const { resultApiID, setResultApiID } = useContext(ContextRecipe);
+  const { heartColor, setHeartColor, ApiIdDetalhe, setApiIdDetalhe, funcHeartColor  } = useContext(ContextRecipe);
   const { match: { params: { id } } } = props;
   const history = useHistory();
   const [heartColor, setHeartColor] = useState(whiteHeartIcon);
   const [recomandation, setRecomandation] = useState([]);
 
-  const changeColorHeart = () => {
-    if (heartColor === blackHeartIcon) {
-      setHeartColor(whiteHeartIcon);
+  useEffect(() => {
+    const getLocalFavUse = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (getLocalFavUse) {
+      const filtrLocal = getLocalFavUse.filter((item) => item.id === ApiIdDetalhe.idDrink);
+      if (filtrLocal.length === 1) {
+        setHeartColor(blackHeartIcon);
+      }
     }
-    if (heartColor === whiteHeartIcon) {
-      setHeartColor(blackHeartIcon);
-    }
-  };
+  }, [ApiIdDetalhe, setHeartColor]);
+
     // https://www.thecocktaildb.com/api/json/v1/1/search.php?s=;
   useEffect(() => {
     fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
       .then((response) => response.json()).then(({ drinks }) => setRecomandation(drinks));
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
-      .then((result) => result.json()).then(({ meals }) => setResultApiID(meals[0]));
-  }, [id, setResultApiID]);
+      .then((result) => result.json()).then(({ meals }) => setApiIdDetalhe(meals[0]));
+  }, [id, setApiIdDetalhe]);
 
   const six = 6;
   const ingredients = [
-    { ingredient: resultApiID.strIngredient1, measure: resultApiID.strMeasure1 },
-    { ingredient: resultApiID.strIngredient2, measure: resultApiID.strMeasure2 },
-    { ingredient: resultApiID.strIngredient3, measure: resultApiID.strMeasure3 },
-    { ingredient: resultApiID.strIngredient4, measure: resultApiID.strMeasure4 },
-    { ingredient: resultApiID.strIngredient5, measure: resultApiID.strMeasure5 },
-    { ingredient: resultApiID.strIngredient6, measure: resultApiID.strMeasure6 },
-    { ingredient: resultApiID.strIngredient7, measure: resultApiID.strMeasure7 },
-    { ingredient: resultApiID.strIngredient8, measure: resultApiID.strMeasure8 },
-    { ingredient: resultApiID.strIngredient9, measure: resultApiID.strMeasure9 },
-    { ingredient: resultApiID.strIngredient10, measure: resultApiID.strMeasure10 },
-    { ingredient: resultApiID.strIngredient11, measure: resultApiID.strMeasure11 },
-    { ingredient: resultApiID.strIngredient12, measure: resultApiID.strMeasure12 },
-    { ingredient: resultApiID.strIngredient13, measure: resultApiID.strMeasure13 },
-    { ingredient: resultApiID.strIngredient14, measure: resultApiID.strMeasure14 },
-    { ingredient: resultApiID.strIngredient15, measure: resultApiID.strMeasure15 },
-    { ingredient: resultApiID.strIngredient16, measure: resultApiID.strMeasure16 },
-    { ingredient: resultApiID.strIngredient17, measure: resultApiID.strMeasure17 },
-    { ingredient: resultApiID.strIngredient18, measure: resultApiID.strMeasure18 },
-    { ingredient: resultApiID.strIngredient19, measure: resultApiID.strMeasure19 },
-    { ingredient: resultApiID.strIngredient20, measure: resultApiID.strMeasure20 }];
+    { ingredient: ApiIdDetalhe.strIngredient1, measure: ApiIdDetalhe.strMeasure1 },
+    { ingredient: ApiIdDetalhe.strIngredient2, measure: ApiIdDetalhe.strMeasure2 },
+    { ingredient: ApiIdDetalhe.strIngredient3, measure: ApiIdDetalhe.strMeasure3 },
+    { ingredient: ApiIdDetalhe.strIngredient4, measure: ApiIdDetalhe.strMeasure4 },
+    { ingredient: ApiIdDetalhe.strIngredient5, measure: ApiIdDetalhe.strMeasure5 },
+    { ingredient: ApiIdDetalhe.strIngredient6, measure: ApiIdDetalhe.strMeasure6 },
+    { ingredient: ApiIdDetalhe.strIngredient7, measure: ApiIdDetalhe.strMeasure7 },
+    { ingredient: ApiIdDetalhe.strIngredient8, measure: ApiIdDetalhe.strMeasure8 },
+    { ingredient: ApiIdDetalhe.strIngredient9, measure: ApiIdDetalhe.strMeasure9 },
+    { ingredient: ApiIdDetalhe.strIngedient10, measure: ApiIdDetalhe.strMeasure10 },
+    { ingredient: ApiIdDetalhe.strIngedient11, measure: ApiIdDetalhe.strMeasure11 },
+    { ingredient: ApiIdDetalhe.strIngredient12, measure: ApiIdDetalhe.strMeasure12 },
+    { ingredient: ApiIdDetalhe.strIngredient13, measure: ApiIdDetalhe.strMeasure13 },
+    { ingredient: ApiIdDetalhe.strIngredient14, measure: ApiIdDetalhe.strMeasure14 },
+    { ingredient: ApiIdDetalhe.strIngredient15, measure: ApiIdDetalhe.strMeasure15 }];
 
   const historyURL = () => (history.push(`${history.location.pathname}/in-progress`));
 
@@ -64,23 +61,23 @@ function DetalhesComidas(props) {
     <section>
       <h3>Detalhe Comida</h3>
       <img
-        src={ resultApiID.strMealThumb }
+        src={ ApiIdDetalhe.strMealThumb }
         data-testid="recipe-photo"
         alt="foto bebida"
         width="100px"
       />
-      <p data-testid="recipe-title">{resultApiID.strMeal}</p>
+      <p data-testid="recipe-title">{ApiIdDetalhe.strMeal}</p>
       <img src={ shareIcon } alt="share" data-testid="share-btn" />
       <input
         type="image"
         label="favorite"
         src={ heartColor }
-        onClick={ () => changeColorHeart() }
+        onClick={ () => funcHeartColor(heartColor, setHeartColor, ApiIdDetalhe) }
         alt="heart"
         width="25px"
         data-testid="favorite-btn"
       />
-      <p data-testid="recipe-category">{resultApiID.strCategory}</p>
+      <p data-testid="recipe-category">{ApiIdDetalhe.strCategory}</p>
       <ol>
         {ingredients.map((ingre, index) => (
           <li
@@ -91,11 +88,11 @@ function DetalhesComidas(props) {
             {ingre.measure}
           </li>))}
       </ol>
-      <p data-testid="instructions">{resultApiID.strInstructions}</p>
+      <p data-testid="instructions">{ApiIdDetalhe.strInstructions}</p>
       <iframe
         width="560"
         height="315"
-        src={ resultApiID.strYoutube }
+        src={ ApiIdDetalhe.strYoutube }
         data-testid="video"
         title="YouTube video player"
       />

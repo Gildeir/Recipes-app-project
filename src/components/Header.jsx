@@ -39,36 +39,35 @@ function Header() {
 
   const alertZeroFound = async () => {
     await searchAPI();
-
   };
 
   const searchBtn = () => {
     if (location.pathname === '/comidas') {
       return (
         <input
-        type="image"
-        src={ searchIcon }
-        data-testid="search-top-btn"
-        alt="search icon"
-        onClick={ () => handleSearch() }
-      />
-      )
+          type="image"
+          src={ searchIcon }
+          data-testid="search-top-btn"
+          alt="search icon"
+          onClick={ () => handleSearch() }
+        />
+      );
     }
     if (location.pathname === '/bebidas') {
       return (
         <input
-        type="image"
-        src={ searchIcon }
-        data-testid="search-top-btn"
-        alt="search icon"
-        onClick={ () => handleSearch() }
-      />
-      )
+          type="image"
+          src={ searchIcon }
+          data-testid="search-top-btn"
+          alt="search icon"
+          onClick={ () => handleSearch() }
+        />
+      );
     }
-  }
+  };
 
   return (
-    
+
     <header className="header_bar">
       <section>
         <Link to="/perfil">
@@ -83,7 +82,7 @@ function Header() {
         {/* <h3 data-testid="page-title">Comidas</h3> */}
         {ChangeTitle()}
         {searchBtn()}
-   
+
         {enableSearch === true ? <input
           type="text"
           data-testid="search-input"

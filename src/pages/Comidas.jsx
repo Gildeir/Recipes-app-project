@@ -14,6 +14,7 @@ function Comidas() {
   } = useContext(ContextRecipe);
   const history = useHistory();
   const [dataCategory, setDataCategory] = useState([]);
+  const [select, setSelect] = useState(false);
 
   useEffect(() => {
     fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${itemDigitado}`)
@@ -23,10 +24,31 @@ function Comidas() {
         const result = meals.slice(0, limite);
         setDataCategory(result);
       }).catch(() => setDataCategory(null));
-  }, [itemDigitado]);
+  }, [itemDigitado, setDataCategory]);
 
   async function handleClick({ value }) {
-    setItemDigitado(value);
+    if (value === itemDigitado) {
+      setSelect(false);
+      setItemDigitado('');
+    }
+    if (select === false) {
+      setSelect(true);
+      setItemDigitado(value);
+    }
+  }
+
+  useEffect(() => {
+    fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+      .then((response) => response.json())
+      .then(({ meals }) => {
+        const limite = 12;
+        const result = meals.slice(0, limite);
+        setApiDataFood(result);
+      }).catch(() => setApiDataFood(null));
+  }, [setApiDataFood, itemDigitado]);
+
+  function handleAllButton() {
+    setItemDigitado('');
   }
 
   const alarm = () => {
@@ -34,48 +56,25 @@ function Comidas() {
     setApiDataFood([]);
   };
 
-  const renderItens = () => {
-    if (dataCategory === null) {
-      return (
-        apiDataFood.map((iten, index) => (
-          <li
-            data-testid={ `${index}-recipe-card` }
-            key={ index }
-          >
-            <div>
-              <Link to={ `/comidas/${iten.idMeal}` }>
-                <img
-                  data-testid={ `${index}-card-img` }
-                  src={ iten.strMealThumb }
-                  width="50px"
-                  alt="Food"
-                />
-                <p data-testid={ `${index}-card-name` }>{ iten.strMeal }</p>
-              </Link>
-            </div>
-          </li>))
-      );
-    }
-    return (
-      dataCategory.map((item, index) => (
-        <li
-          data-testid={ `${index}-recipe-card` }
-          key={ index }
-        >
-          <div>
-            <Link to={ `/comidas/${item.idMeal}` }>
-              <img
-                data-testid={ `${index}-card-img` }
-                src={ item.strMealThumb }
-                width="50px"
-                alt="Food"
-              />
-              <p data-testid={ `${index}-card-name` }>{ item.strMeal }</p>
-            </Link>
-          </div>
-        </li>))
-    );
-  };
+  const renderItens = () => (
+    apiDataFood.map((item, index) => (
+      <li
+        data-testid={ `${index}-recipe-card` }
+        key={ index }
+      >
+        <div>
+          <Link to={ `/comidas/${item.idMeal}` }>
+            <img
+              data-testid={ `${index}-card-img` }
+              src={ item.strMealThumb }
+              width="50px"
+              alt="Food"
+            />
+            <p data-testid={ `${index}-card-name` }>{ item.strMeal }</p>
+          </Link>
+        </div>
+      </li>))
+  );
 
   const direcionar = () => {
     if (apiDataFood === null) {
@@ -108,6 +107,8 @@ function Comidas() {
           type="button"
           name="all"
           value="all"
+          onClick={ () => handleAllButton() }
+
         >
           All
         </button>
