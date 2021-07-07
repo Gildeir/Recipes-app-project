@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 // import Header from '../components/Header';
 
+const copy = require('clipboard-copy');
+
+function copyLink(index, setIndex) {
+  if (index === setIndex) {
+    return (
+      <span>Link copiado!</span>
+    );
+  }
+}
+
 function ReceitasFavoritadas() {
+  const [shareCopy, setShareCopy] = useState([false, '']);
   const localGetFav = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const history = useHistory();
 
@@ -81,8 +92,9 @@ function ReceitasFavoritadas() {
               src={ shareIcon }
               alt="share"
               data-testid={ `${index}-horizontal-share-btn` }
-              onClick={ {} }
+              onClick={ () => setShareCopy([true, index]) || copy(`http://localhost:3000/${item.type}s/${item.id}`) }
             />
+            {shareCopy ? copyLink(index, shareCopy[1]) : null}
             <input
               type="image"
               src={ blackHeartIcon }
@@ -95,5 +107,5 @@ function ReceitasFavoritadas() {
     </>
   );
 }
-// to push
+
 export default ReceitasFavoritadas;
