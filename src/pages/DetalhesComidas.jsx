@@ -58,7 +58,7 @@ function DetalhesComidas(props) {
     { ingredient: ApiIdDetalhe.strIngredient15, measure: ApiIdDetalhe.strMeasure15 }];
 
   const historyURL = () => (
-    history.push(`${history.location.pathname}/${id}/in-progress`)
+    history.push(`${history.location.pathname}/in-progress`)
   );
 
   const renderIngredient = (ingre, index) => {
