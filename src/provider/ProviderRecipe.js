@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import ContextRecipe from './ContextRecipe';
-import { Comidas, Bebidas, changeColorHeart } from './ApiFunctions';
+import { Comidas, Bebidas, ChangeColorHeart } from './ApiFunctions';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
@@ -67,9 +67,14 @@ function RecipeProvider({ children }) {
     }
   };
 
-  const funcHeartColor = (heartColor, setHeartColor, ApiIdDetalhe, id) => {
-    changeColorHeart(heartColor, setHeartColor, ApiIdDetalhe, id);
-  }
+  const heart = {
+    heartColor,
+    setHeartColor,
+  };
+
+  const funcHeartColor = (ApiIdDetalhe, id) => {
+    ChangeColorHeart(heart, ApiIdDetalhe, id, location.pathname);
+  };
 
   const values = {
     login,

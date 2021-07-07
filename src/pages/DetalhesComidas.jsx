@@ -13,23 +13,25 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../css/barraRolagem.css';
 
 function DetalhesComidas(props) {
-  const { heartColor, setHeartColor, ApiIdDetalhe, setApiIdDetalhe, funcHeartColor  } = useContext(ContextRecipe);
+  const { heartColor, setHeartColor,
+    ApiIdDetalhe, setApiIdDetalhe, funcHeartColor } = useContext(ContextRecipe);
   const { match: { params: { id } } } = props;
   const history = useHistory();
-  const [heartColor, setHeartColor] = useState(whiteHeartIcon);
   const [recomandation, setRecomandation] = useState([]);
 
   useEffect(() => {
     const getLocalFavUse = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (getLocalFavUse) {
-      const filtrLocal = getLocalFavUse.filter((item) => item.id === ApiIdDetalhe.idDrink);
+      const filtrLocal = getLocalFavUse.filter((item) => (
+        item.id === ApiIdDetalhe.idDrink));
       if (filtrLocal.length === 1) {
         setHeartColor(blackHeartIcon);
+      } else {
+        setHeartColor(whiteHeartIcon);
       }
     }
   }, [ApiIdDetalhe, setHeartColor]);
 
-    // https://www.thecocktaildb.com/api/json/v1/1/search.php?s=;
   useEffect(() => {
     fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
       .then((response) => response.json()).then(({ drinks }) => setRecomandation(drinks));
@@ -72,7 +74,7 @@ function DetalhesComidas(props) {
         type="image"
         label="favorite"
         src={ heartColor }
-        onClick={ () => funcHeartColor(heartColor, setHeartColor, ApiIdDetalhe) }
+        onClick={ () => funcHeartColor(ApiIdDetalhe, id) }
         alt="heart"
         width="25px"
         data-testid="favorite-btn"

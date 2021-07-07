@@ -31,35 +31,51 @@ export const Bebidas = (itemDigitado, userClick) => {
   }
 };
 
-export const changeColorHeart = (heartColor, setHeartColor, ApiIdDetalhe, id) => {
+const comidaLocal = (ApiIdDetalhe, getLocalFav) => {
+  if (getLocalFav === null || getLocalFav === []) {
+    localStorage.setItem('favoriteRecipes', JSON.stringify(
+      [{ id: ApiIdDetalhe.idMeal,
+        type: 'comida',
+        area: ApiIdDetalhe.strArea,
+        category: ApiIdDetalhe.strCategory,
+        alcoholicOrNot: '',
+        name: ApiIdDetalhe.strMeal,
+        image: ApiIdDetalhe.strMealThumb,
+      }],
+    ));
+  } else {
+    localStorage.setItem('favoriteRecipes', JSON.stringify(
+      [...getLocalFav,
+        { id: ApiIdDetalhe.idMeal,
+          type: 'comida',
+          area: ApiIdDetalhe.strArea,
+          category: ApiIdDetalhe.strCategory,
+          alcoholicOrNot: '',
+          name: ApiIdDetalhe.strMeal,
+          image: ApiIdDetalhe.strMealThumb,
+        }],
+    ));
+  }
+};
+
+export const ChangeColorHeart = (heart, ApiIdDetalhe, id, path) => {
+  const { heartColor, setHeartColor } = heart;
   const getLocalFav = JSON.parse(localStorage.getItem('favoriteRecipes'));
   if (heartColor === blackHeartIcon) {
     setHeartColor(whiteHeartIcon);
-      const filterLocal = getLocalFav.filter((itens) => itens.id !== id);
-      if (getLocalFav.length === 1) {
-        localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-      } else {
-        localStorage.setItem('favoriteRecipes', JSON.stringify(filterLocal));
-      }
-
+    const filterLocal = getLocalFav.filter((itens) => itens.id !== id);
+    if (getLocalFav.length === 1) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(filterLocal));
+    }
   }
   if (heartColor === whiteHeartIcon) {
     setHeartColor(blackHeartIcon);
-    if (getLocalFav === null || getLocalFav === []) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(
-        [{ id: ApiIdDetalhe.idDrink,
-          type: 'bebida',
-          area: '',
-          category: ApiIdDetalhe.strCategory,
-          alcoholicOrNot: ApiIdDetalhe.strAlcoholic,
-          name: ApiIdDetalhe.strDrink,
-          image: ApiIdDetalhe.strDrinkThumb,
-        }],
-      ));
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(
-        [...getLocalFav,
-          { id: ApiIdDetalhe.idDrink,
+    if (path === `/bebidas/${id}`) {
+      if (getLocalFav === null || getLocalFav === []) {
+        localStorage.setItem('favoriteRecipes', JSON.stringify(
+          [{ id: ApiIdDetalhe.idDrink,
             type: 'bebida',
             area: '',
             category: ApiIdDetalhe.strCategory,
@@ -67,7 +83,23 @@ export const changeColorHeart = (heartColor, setHeartColor, ApiIdDetalhe, id) =>
             name: ApiIdDetalhe.strDrink,
             image: ApiIdDetalhe.strDrinkThumb,
           }],
-      ));
+        ));
+      } else {
+        localStorage.setItem('favoriteRecipes', JSON.stringify(
+          [...getLocalFav,
+            { id: ApiIdDetalhe.idDrink,
+              type: 'bebida',
+              area: '',
+              category: ApiIdDetalhe.strCategory,
+              alcoholicOrNot: ApiIdDetalhe.strAlcoholic,
+              name: ApiIdDetalhe.strDrink,
+              image: ApiIdDetalhe.strDrinkThumb,
+            }],
+        ));
+      }
+    }
+    if (path === `/comidas/${id}`) {
+      comidaLocal(ApiIdDetalhe, getLocalFav);
     }
   }
 };
