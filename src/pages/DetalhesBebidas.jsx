@@ -55,7 +55,8 @@ function DetalhesBebidas(props) {
     { ingredient: ApiIdDetalhe.strIngredient14, measure: ApiIdDetalhe.strMeasure14 },
     { ingredient: ApiIdDetalhe.strIngredient15, measure: ApiIdDetalhe.strMeasure15 }];
 
-  const historyURL = () => (history.push(`${history.location.pathname}/in-progress`));
+  const historyURL = () => (
+    history.push(`${history.location.pathname}/${id}/in-progress`));
 
   const renderIngredient = (ingre, index) => {
     if (ingre.ingredient === null

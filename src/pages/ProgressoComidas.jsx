@@ -1,4 +1,5 @@
 import React, { /* useState, */ useContext } from 'react';
+import PropTypes from 'prop-types';
 import ContextRecipe from '../provider/ContextRecipe';
 import shareIcon from '../images/shareIcon.svg';
 // import heartColor from '../images/heartColor.svg';
@@ -6,34 +7,22 @@ import ingredientRecie from '../api/IngredientRecie';
 
 // const copy = require('clipboard-copy');
 
-function ProgressoComidas() {
-  const { resultApiID } = useContext(ContextRecipe);
-  // const [verify, setVerify] = useState([]);
+function ProgressoComidas(props) {
+  const { match: { params: { id } } } = props;
+  const { ApiIdDetalhe, funcHeartColor, heartColor } = useContext(ContextRecipe);
+  // const [verified, setVerified] = useState([]);
   console.log(ingredientRecie());
-
-  // botão de verificação de receitas
-  // function handleClickVerify(index) {
-  //   setVerify(verify.includes(index)
-  //     ? verify.filter((check) => check !== index) : [index, ...verify]);
-  // }
 
   return (
     <>
-      {/* imagem da comida */}
       <img
-        src={ resultApiID.strMealThumb || resultApiID.strDrinkThumb }
+        src={ ApiIdDetalhe.strMealThumb || ApiIdDetalhe.strDrinkThumb }
         data-testid="recipe-photo"
         alt="Thumbnail"
       />
-
-      {/* título da comida */}
-      <h1
-        data-testid="recipe-title"
-      >
-        { resultApiID.strMealThumb || resultApiID.strDrinkThumb }
+      <h1 data-testid="recipe-title">
+        { ApiIdDetalhe.strMealThumb || ApiIdDetalhe.strDrinkThumb }
       </h1>
-
-      {/* botão de compartilhar */}
       <input
         type="image"
         src={ shareIcon }
@@ -46,53 +35,35 @@ function ProgressoComidas() {
       <input
         type="image"
         label="favorite"
-        // src={ /* heartColor */ }
-        // onClick={ () => changeColorHeart() }
+        src={ heartColor }
+        onClick={ () => funcHeartColor(ApiIdDetalhe, id) }
         alt="heart"
         width="25px"
         data-testid="favorite-btn"
       />
-
-      {/* texto da categoria */}
-      <h5
-        data-testid="recipe-category"
-      >
-        {resultApiID.strAlcoholic ? resultApiID.strAlcoholic : resultApiID.strCategory}
-
+      <h5 data-testid="recipe-category">
+        {ApiIdDetalhe.strAlcoholic ? ApiIdDetalhe.strAlcoholic : ApiIdDetalhe.strCategory}
       </h5>
-
-      {/* verificação de ingredientes  -data-testid=${index}-ingredient-step */}
       <h2>Ingredientes</h2>
-
-      {ingredientRecie().map((ingre, index) => (
-        <li
-          key={ index }
-          data-testid={ `${index}-ingredient-name-and-measure` }
-        >
-          {ingre.ingredient}
-          {ingre.measure}
-        </li>))}
-
-      {/* {ingredientRecie().map((ingredient, index) => (
+      {ingredientRecie().map((ingredient, index) => (
         <div
           key={ index }
           data-testid={ `${index}-ingredient-step` }
         >
           <input
-            verify={ verify.includes(index) }
             type="checkbox"
             name={ ingredient }
             value={ ingredient }
             id={ ingredient }
-            onClick={ () => handleClickVerify() }
+            onClick={ ({ target }) => console.log(target) }
           />
           <label htmlFor={ ingredient }>{ ingredient }</label>
         </div>
-      ))} */}
+      ))}
 
       {/* texto da categoria */}
       <h2>Instruções</h2>
-      <p data-testid="instructions">{resultApiID.strInstructions}</p>
+      <p data-testid="instructions">{ApiIdDetalhe.strInstructions}</p>
 
       {/* botão para finalizar */}
       <button
@@ -107,5 +78,9 @@ function ProgressoComidas() {
     </>
   );
 }
+
+ProgressoComidas.propTypes = {
+  match: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
 export default ProgressoComidas;
