@@ -95,5 +95,5 @@ function ReceitasFavoritadas() {
     </>
   );
 }
-
+// to push
 export default ReceitasFavoritadas;
