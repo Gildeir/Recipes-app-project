@@ -57,7 +57,27 @@ function DetalhesComidas(props) {
     { ingredient: ApiIdDetalhe.strIngredient14, measure: ApiIdDetalhe.strMeasure14 },
     { ingredient: ApiIdDetalhe.strIngredient15, measure: ApiIdDetalhe.strMeasure15 }];
 
-  const historyURL = () => (history.push(`${history.location.pathname}/in-progress`));
+  const historyURL = () => (
+    history.push(`${history.location.pathname}/in-progress`)
+  );
+
+  const renderIngredient = (ingre, index) => {
+    if (ingre.ingredient === null
+      || ingre.ingredient === ''
+      || ingre.ingredient === undefined) {
+      return null;
+    }
+    return (
+      <li
+        key={ index }
+        data-testid={ `${index}-ingredient-name-and-measure` }
+      >
+        {ingre.ingredient}
+        {' '}
+        {ingre.measure}
+        {' '}
+      </li>);
+  };
 
   return (
     <section>
@@ -81,14 +101,7 @@ function DetalhesComidas(props) {
       />
       <p data-testid="recipe-category">{ApiIdDetalhe.strCategory}</p>
       <ol>
-        {ingredients.map((ingre, index) => (
-          <li
-            key={ index }
-            data-testid={ `${index}-ingredient-name-and-measure` }
-          >
-            {ingre.ingredient}
-            {ingre.measure}
-          </li>))}
+        {ingredients.map((ingre, index) => (renderIngredient(ingre, index)))}
       </ol>
       <p data-testid="instructions">{ApiIdDetalhe.strInstructions}</p>
       <iframe

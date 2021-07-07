@@ -38,8 +38,14 @@ function App() {
         path="/bebidas/:id"
         render={ (props) => <DetalhesBebidas { ...props } /> }
       />
-      <Route path="/comidas/:id/in-progress" component={ ProgressoComidas } />
-      <Route path="/bebidas/:id/in-progress" component={ ProgressoBebidas } />
+      <Route
+        path="/comidas/:id/in-progress"
+        render={ (props) => <ProgressoComidas { ...props } /> }
+      />
+      <Route
+        path="/bebidas/:id/in-progress"
+        render={ (props) => <ProgressoBebidas { ...props } /> }
+      />
       <Route exact path="/explorar" component={ Explorar } />
       <Route exact path="/explorar/comidas" component={ ExplorarComidas } />
       <Route path="/explorar/bebidas/area" component={ NotFound } />

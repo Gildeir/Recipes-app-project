@@ -72,7 +72,7 @@ export const ChangeColorHeart = (heart, ApiIdDetalhe, id, path) => {
   }
   if (heartColor === whiteHeartIcon) {
     setHeartColor(blackHeartIcon);
-    if (path === `/bebidas/${id}`) {
+    if (path === `/bebidas/${id}` || `/bebidas/${id}/in-progress`) {
       if (getLocalFav === null || getLocalFav === []) {
         localStorage.setItem('favoriteRecipes', JSON.stringify(
           [{ id: ApiIdDetalhe.idDrink,
@@ -98,7 +98,7 @@ export const ChangeColorHeart = (heart, ApiIdDetalhe, id, path) => {
         ));
       }
     }
-    if (path === `/comidas/${id}`) {
+    if (path === `/comidas/${id}` || path === `/comidas/${id}/in-progress` ) {
       comidaLocal(ApiIdDetalhe, getLocalFav);
     }
   }

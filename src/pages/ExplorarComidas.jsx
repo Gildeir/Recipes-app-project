@@ -6,8 +6,12 @@ import Footer from '../components/Footer';
 function ExplorarComidas() {
   /* Ao clicar no botão "Me Surpreenda!" da tela de explorar comidas a rota muda para a página de detalhes de uma comida aleatória obtida através do endpoint https://www.themealdb.com/api/json/v1/1/random.php;
 Ao clicar no botão "Me Surpreenda!" da tela de explorar bebidas a rota muda para a página de detalhes de uma bebida aleatória obtida através do endpoint https://www.thecocktaildb.com/api/json/v1/1/random.php. */
-
   const history = useHistory();
+  const meSurpreenda = () => {
+    fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+      .then((response) => response.json())
+      .then(({ meals }) => history.push(`/comidas/${meals[0].idMeal}`));
+  };
   return (
     <>
       <p data-testid="page-title">Explorar Comidas</p>
@@ -34,7 +38,7 @@ Ao clicar no botão "Me Surpreenda!" da tela de explorar bebidas a rota muda par
         type="button"
         data-testid="explore-surprise"
         label="Me Surpreenda!"
-        onClick={ {} }
+        onClick={ () => meSurpreenda() }
       >
         Me Surpreenda!
       </button>
