@@ -4,6 +4,8 @@ import shareIcon from '../images/shareIcon.svg';
 // import heartColor from '../images/heartColor.svg';
 import ingredientRecie from '../api/IngredientRecie';
 
+// const copy = require('clipboard-copy');
+
 function ProgressoComidas() {
   const { resultApiID } = useContext(ContextRecipe);
   // const [verify, setVerify] = useState([]);
@@ -32,7 +34,13 @@ function ProgressoComidas() {
       </h1>
 
       {/* botão de compartilhar */}
-      <img src={ shareIcon } alt="share" data-testid="share-btn" />
+      <input
+        type="image"
+        src={ shareIcon }
+        alt="share"
+        data-testid="share-btn"
+        onClick={ {} } // clipboard
+      />
 
       {/* botão de favoritar */}
       <input

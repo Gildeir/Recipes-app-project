@@ -26,6 +26,10 @@ function ReceitasFavoritadas() {
     history.push(`${history.location.pathname}`);
   };
 
+  // const handleFilter = () => {
+  //   !localGetFav ? null :
+  // };
+
   return (
     <>
       <Link to="/perfil">

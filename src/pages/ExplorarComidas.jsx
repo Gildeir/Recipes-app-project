@@ -9,9 +9,9 @@ Ao clicar no botão "Me Surpreenda!" da tela de explorar bebidas a rota muda par
   const history = useHistory();
   const meSurpreenda = () => {
     fetch('https://www.themealdb.com/api/json/v1/1/random.php')
-      .then((response) =>  response.json())
-      .then(({ meals }) => history.push(`/comidas/${meals[0].idMeal}`))
-  }
+      .then((response) => response.json())
+      .then(({ meals }) => history.push(`/comidas/${meals[0].idMeal}`));
+  };
   return (
     <>
       <p data-testid="page-title">Explorar Comidas</p>

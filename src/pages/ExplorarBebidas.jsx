@@ -7,9 +7,9 @@ function ExplorarBebidas() {
   const history = useHistory();
   const meSurpreenda = () => {
     fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
-      .then((response) =>  response.json())
-      .then(({ drinks }) => history.push(`/bebidas/${drinks[0].idDrink}`))
-  }
+      .then((response) => response.json())
+      .then(({ drinks }) => history.push(`/bebidas/${drinks[0].idDrink}`));
+  };
   return (
     <>
       <p data-testid="page-title">Explorar Bebidas</p>
