@@ -5,6 +5,7 @@ import { Carousel } from 'react-bootstrap';
 // import { Link } from 'react-router-dom';
 // import ContextRecipe from '../provider/ContextRecipe';
 import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import ContextRecipe from '../provider/ContextRecipe';
 import '../css/barraRolagem.css';
@@ -13,14 +14,18 @@ function DetalhesBebidas(props) {
   const history = useHistory();
   const { match: { params: { id } } } = props;
   const [recomandation, setRecomandation] = useState([]);
-  const { heartColor, setHeartColor, ApiIdDetalhe, setApiIdDetalhe, funcHeartColor } = useContext(ContextRecipe);
+  const { heartColor, setHeartColor,
+    ApiIdDetalhe, setApiIdDetalhe, funcHeartColor } = useContext(ContextRecipe);
 
   useEffect(() => {
     const getLocalFavUse = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (getLocalFavUse) {
-      const filtrLocal = getLocalFavUse.filter((item) => item.id === ApiIdDetalhe.idDrink);
+      const filtrLocal = getLocalFavUse.filter((item) => (
+        item.id === ApiIdDetalhe.idDrink));
       if (filtrLocal.length === 1) {
         setHeartColor(blackHeartIcon);
+      } else {
+        setHeartColor(whiteHeartIcon);
       }
     }
   }, [ApiIdDetalhe, setHeartColor]);
@@ -67,7 +72,7 @@ function DetalhesBebidas(props) {
         type="image"
         label="favorite"
         src={ heartColor }
-        onClick={ () => funcHeartColor(heartColor, setHeartColor, ApiIdDetalhe, id) }
+        onClick={ () => funcHeartColor(ApiIdDetalhe, id) }
         alt="heart"
         width="25px"
         data-testid="favorite-btn"

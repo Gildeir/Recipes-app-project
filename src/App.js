@@ -49,7 +49,7 @@ function App() {
       <Route path="/explorar/comidas/area" component={ OrigemComidas } />
       <Route path="/perfil" component={ Perfil } />
       <Route path="/receitas-feitas" component={ ReceitasFeitas } />
-      <Route path="/receitas-favoritadas" component={ ReceitasFavoritadas } />
+      <Route path="/receitas-favoritas" component={ ReceitasFavoritadas } />
     </ProviderRecipes>
   );
 }
