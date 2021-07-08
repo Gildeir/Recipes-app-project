@@ -1,26 +1,37 @@
 import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
+
 import ContextRecipe from '../provider/ContextRecipe';
 import shareIcon from '../images/shareIcon.svg';
-// import heartColor from '../images/heartColor.svg';
-// import ingredientRecie from '../api/IngredientRecie';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-// const copy = require('clipboard-copy');
+
+const copy = require('clipboard-copy');
+
+function copyLink(index, setIndex) {
+  if (index === setIndex) {
+    return (
+      <span>Link copiado!</span>
+    );
+  }
+}
 
 function ProgressoComidas(props) {
+  const location = useLocation();
+
   const { match: { params: { id } } } = props;
   const { ApiIdDetalhe,
     setApiIdDetalhe,
     funcHeartColor, heartColor, setHeartColor } = useContext(ContextRecipe);
   const [array, setArray] = useState([]);
+  const [shareCopy, setShareCopy] = useState([false, '']);
   console.log(`quantidade do array ${array.length}`);
 
   useEffect(() => {
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
       .then((result) => result.json()).then(({ meals }) => setApiIdDetalhe(meals[0]));
   }, [setApiIdDetalhe, id]);
-  // const [verified, setVerified] = useState([]);
 
   useEffect(() => {
     const getLocalFavUse = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -65,6 +76,7 @@ function ProgressoComidas(props) {
     }
     return false;
   };
+
   console.log(buttonAvaliable());
   const renderIngredient = (ingre, index) => {
     if (ingre.ingredient === null
@@ -107,8 +119,10 @@ function ProgressoComidas(props) {
         src={ shareIcon }
         alt="share"
         data-testid="share-btn"
-        onClick={ {} } // clipboard
+        onClick={ () => setShareCopy(true) || copy((`http://localhost:3000/comidas/${id}`)) }
+
       />
+      {shareCopy ? copyLink(shareCopy[1]) : null}
 
       {/* botão de favoritar */}
       <input
