@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Carousel } from 'react-bootstrap';
 // import { Link } from 'react-router-dom';
@@ -15,7 +15,11 @@ function DetalhesBebidas(props) {
   const { match: { params: { id } } } = props;
   const [recomandation, setRecomandation] = useState([]);
   const { heartColor, setHeartColor,
-    ApiIdDetalhe, setApiIdDetalhe, funcHeartColor } = useContext(ContextRecipe);
+    ApiIdDetalhe,
+    setApiIdDetalhe, funcHeartColor, setIdHeart, idHeart } = useContext(ContextRecipe);
+  const location = useLocation();
+  setIdHeart(location.pathname);
+  console.log(`eu sou idHeart: ${idHeart}`);
 
   useEffect(() => {
     const getLocalFavUse = JSON.parse(localStorage.getItem('favoriteRecipes'));

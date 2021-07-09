@@ -28,11 +28,17 @@ function Bebidas() {
 
   async function handleClick({ value }) {
     if (value === itemDigitado) {
+      console.log(`true${itemDigitado}`);
       setSelect(false);
       setItemDigitado('');
     }
+    if (value !== itemDigitado) {
+      setItemDigitado(value);
+    }
     if (select === false) {
       setSelect(true);
+      console.log(`value 2${value}`);
+      console.log(`false${itemDigitado}`);
       setItemDigitado(value);
     }
   }
@@ -55,11 +61,13 @@ function Bebidas() {
       return (
         apiDataDrink.map((iten, index) => (
           <li
-            data-testid={ `${index}-recipe-card` }
             key={ index }
           >
             <div>
-              <Link to={ `/bebidas/${iten.idDrink}` }>
+              <Link
+                to={ `/bebidas/${iten.idDrink}` }
+                data-testid={ `${index}-recipe-card` }
+              >
                 <img
                   data-testid={ `${index}-card-img` }
                   src={ iten.strDrinkThumb }
