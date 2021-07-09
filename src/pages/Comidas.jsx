@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ContextRecipe from '../provider/ContextRecipe';
@@ -118,7 +119,8 @@ function Comidas() {
       <Header dataCategory={ dataCategory } />
       <div>
         { categoryBtn.map((category) => (
-          <button
+          <Button
+            variant="outline-success"
             data-testid={ `${category.strCategory}-category-filter` }
             key={ category.strCategory }
             type="button"
@@ -127,19 +129,19 @@ function Comidas() {
             onClick={ ({ target }) => handleClick(target) }
           >
             { category.strCategory }
-          </button>
+          </Button>
         )) }
-        <button
+        <Button
+          variant="outline-success"
           data-testid="All-category-filter"
           key="all"
           type="button"
           name="all"
           value="all"
           onClick={ () => handleAllButton() }
-
         >
           All
-        </button>
+        </Button>
       </div>
       <ol>
         {apiDataFood === null ? alarm() : renderItens()}

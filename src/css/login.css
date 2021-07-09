@@ -1,30 +1,29 @@
-/* * {
-  margin: 0px;
-  padding: 0px;
+@import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap') ;
+
+* {
   box-sizing: border-box;
+  margin: auto;
+  padding: auto;
 }
 
 body, html {
-	height: 100%;
-	font-family: SourceSansPro-Regular, sans-serif;
-  }
+  background-color: #eeeae1;
+  background-image: image();
+  font-family: Merienda , SourceSansPro-Regular , sans-serif;
+  height: 100%;
+}
 
 .container-login100 {
-  width: 100%;
-  min-height: 100vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
+  align-items: center;
+  background-position: center;
+  background-size: cover;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  min-height: 100vh;
   padding: 15px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
   position: relative;
+  width: 100%;
   z-index: 1;
 }
- */
+

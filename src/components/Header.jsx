@@ -6,6 +6,8 @@ import searchIcon from '../images/searchIcon.svg';
 import ContextRecipe from '../provider/ContextRecipe';
 import ChangeTitle from './ChangeTitle';
 
+import '../css/header.css';
+
 function Header() {
   const { setUserClick,
     searchAPI,
@@ -67,77 +69,81 @@ function Header() {
   };
 
   return (
+    <div>
 
-    <header className="header_bar">
-      <section>
-        <Link to="/perfil">
-          <input
-            type="image"
-            alt="profile icon"
-            src={ profileIcon }
-            data-testid="profile-top-btn"
-          />
-        </Link>
+      <header className="header_bar">
+        <section>
+          <Link to="/perfil">
+            <input
+              type="image"
+              alt="profile icon"
+              src={ profileIcon }
+              data-testid="profile-top-btn"
+            />
+          </Link>
 
-        {/* <h3 data-testid="page-title">Comidas</h3> */}
-        {ChangeTitle()}
-        {searchBtn()}
+          {/* <h3 data-testid="page-title">Comidas</h3> */}
+          {ChangeTitle()}
+          {searchBtn()}
 
-        {enableSearch === true ? <input
-          type="text"
-          data-testid="search-input"
-          label="inputIngredients"
-          alt="search input"
-          onChange={ ({ target }) => filterSearch(target) }
-        /> : null }
-        <br />
-        <label htmlFor="Ingrediente">
-          {' '}
-          Ingrediente
-          <input
-            type="radio"
-            data-testid="ingredient-search-radio"
-            name="food"
-            value="Ingrediente"
-            label="Ingrediente"
-            onChange={ handleFilter }
-          />
-        </label>
-        <label htmlFor="Nome">
-          {' '}
-          Nome
-          <input
-            type="radio"
-            data-testid="name-search-radio"
-            name="food"
-            value="busca por nome"
-            label="Nome"
-            onChange={ handleFilter }
-          />
-        </label>
-        <label htmlFor="Letra">
-          {' '}
-          Letra
-          <input
-            type="radio"
-            data-testid="first-letter-search-radio"
-            name="food"
-            value="Primeira letra"
-            label="Letra"
-            onChange={ handleFilter }
-          />
-        </label>
-        <Button
-          type="button"
-          data-testid="exec-search-btn"
-          label="Buscar"
-          onClick={ () => alertZeroFound() }
-        >
-          Buscar
-        </Button>
+          {enableSearch === true ? <input
+            type="text"
+            data-testid="search-input"
+            label="inputIngredients"
+            alt="search input"
+            onChange={ ({ target }) => filterSearch(target) }
+          /> : null }
+          <br />
 
-      </section>
-    </header>
+          <label htmlFor="Ingrediente" className="radiobtn-header">
+            {' '}
+            Ingrediente
+            <input
+              className="radiobtn-header"
+              type="radio"
+              data-testid="ingredient-search-radio"
+              name="food"
+              value="Ingrediente"
+              label="Ingrediente"
+              onChange={ handleFilter }
+            />
+          </label>
+          <label htmlFor="Nome" className="radiobtn-header">
+            {' '}
+            Nome
+            <input
+              type="radio"
+              data-testid="name-search-radio"
+              name="food"
+              value="busca por nome"
+              label="Nome"
+              onChange={ handleFilter }
+            />
+          </label>
+          <label htmlFor="Letra" className="radiobtn-header">
+            Letra
+            <input
+              type="radio"
+              data-testid="first-letter-search-radio"
+              name="food"
+              value="Primeira letra"
+              label="Letra"
+              onChange={ handleFilter }
+            />
+          </label>
+          <Button
+            variant="dark"
+            type="button"
+            data-testid="exec-search-btn"
+            label="Buscar"
+            onClick={ () => alertZeroFound() }
+          >
+            Buscar
+          </Button>
+
+        </section>
+      </header>
+    </div>
   );
 }
 

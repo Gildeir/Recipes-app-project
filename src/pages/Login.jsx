@@ -70,7 +70,7 @@ function Login() {
         </Form.Group>
         <Link to="/comidas">
           <Button
-            variant="primary"
+            variant="dark"
             type="login"
             data-testid="login-submit-btn"
             disabled={ buttonAvaliable() }

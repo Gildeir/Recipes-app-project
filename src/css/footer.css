@@ -1,0 +1,12 @@
+.footer-container {
+  background-color: #003629;
+
+}
+
+.footer {
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+}
