@@ -1,0 +1,57 @@
+.detalhes {
+  box-shadow: 0 2px 6px #555;
+  margin: 50px auto;
+  max-width: 500px;
+  min-height: 400px;
+  padding: 50px;
+  text-align: center;
+  width: 100%;
+}
+
+.tituloDetalhes {
+  color: #ad5525;
+  text-align: center;
+}
+
+.image-bebida {
+  border: 2px solid #ad5525;
+  border-radius: 10%;
+  width: 150px;
+
+}
+
+.detalhes p {
+
+  /* background-color: rgb(209, 178, 93); */
+  border-radius: 10%;
+  flex-direction: column;
+
+}
+
+.ol-list ol {
+  list-style: none;
+  text-align: left;
+  width: 80%;
+}
+
+.icons {
+
+  /* background-color: #ad5525; */
+  border-radius: 30px;
+  display: column;
+  padding: 10px;
+  width: 100px;
+}
+
+.icons p {
+  align-items: flex-end;
+
+  /* background-color: black; */
+  margin: 10px;
+}
+
+.shareImg {
+  margin: 10px;
+
+  /* background-color: orange; */
+}

@@ -42,6 +42,7 @@ function RecipeProvider({ children }) {
         .then(({ drinks }) => {
           const limite = 5;
           const result = drinks.slice(0, limite);
+          const categories = [...result, result[3] = {strCategory: "Other / Unknown"}];
           setCategoryBtn(result);
         });
     }

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import ContextRecipe from '../provider/ContextRecipe';
+import Seletas from '../images/Seletas.png';
 
 import '../css/login.css';
 
@@ -40,7 +41,7 @@ function Login() {
 
   return (
     <section className="container-login100">
-      <Form>
+      <Form className="form-login">
         <Form.Group controlId="formBasicEmail">
           <Form.Label>E-mail</Form.Label>
           <Form.Control
@@ -51,7 +52,7 @@ function Login() {
             onChange={ (event) => setLogin({ email: event.target.value, password }) }
           />
           <Form.Text className="text-muted">
-            Não compartilhe seu e-mail e senha.
+            Não compartilhe seus dados.
           </Form.Text>
         </Form.Group>
 
@@ -70,7 +71,8 @@ function Login() {
         </Form.Group>
         <Link to="/comidas">
           <Button
-            variant="primary"
+            className="button-login"
+            variant="dark"
             type="login"
             data-testid="login-submit-btn"
             disabled={ buttonAvaliable() }
@@ -80,6 +82,7 @@ function Login() {
           </Button>
         </Link>
       </Form>
+      <img className="logo-seletas" src={ Seletas } alt="logo de Seletas" />
     </section>
   );
 }

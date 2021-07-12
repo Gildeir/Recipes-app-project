@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ContextRecipe from '../provider/ContextRecipe';
+import '../css/comidaBebida.css';
 
 function Bebidas() {
   const {
@@ -61,6 +63,7 @@ function Bebidas() {
       return (
         apiDataDrink.map((iten, index) => (
           <li
+            className="liPrincipal"
             key={ index }
           >
             <div>
@@ -83,6 +86,7 @@ function Bebidas() {
     return (
       drinkCategory.map((item, index) => (
         <li
+          className="liPrincipal"
           data-testid={ `${index}-recipe-card` }
           key={ index }
         >
@@ -116,11 +120,12 @@ function Bebidas() {
   };
 
   return (
-    <>
+    <div className="backimgbebida">
       <Header />
-      <div>
+      <div className="divButao">
         { categoryBtn.map((category) => (
-          <button
+          <Button
+            variant="outline-success"
             data-testid={ `${category.strCategory}-category-filter` }
             key={ category.strCategory }
             type="button"
@@ -130,9 +135,10 @@ function Bebidas() {
 
           >
             { category.strCategory }
-          </button>
+          </Button>
         )) }
-        <button
+        <Button
+          variant="outline-success"
           data-testid="All-category-filter"
           key="all"
           type="button"
@@ -141,14 +147,15 @@ function Bebidas() {
           onClick={ () => handleAllButton() }
         >
           All
-        </button>
+        </Button>
       </div>
       <ol>
         {apiDataDrink === null ? alarm() : renderItens()}
         {direcionar()}
       </ol>
+      <div className="espaco" />
       <Footer />
-    </>
+    </div>
   );
 }
 

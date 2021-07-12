@@ -1,0 +1,8 @@
+.footer {
+  background-color: #9aa6ad;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+}

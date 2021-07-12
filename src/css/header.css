@@ -1,0 +1,36 @@
+.header_bar {
+  background-color: #856962;
+  color: white;
+
+}
+
+.up-inputs-header {
+  display: flex;
+}
+
+.up-inputs-header h3 {
+  text-align: center;
+  width: 100%;
+}
+
+.radiobtn-header {
+  margin-left: 2px;
+  margin-right: 30px;
+}
+
+.down-input-header {
+  text-align: center;
+  width: 100%;
+}
+
+.search-input-header {
+  margin-top: 35px;
+  position: absolute;
+  width: 265px;
+}
+
+.cliqlupa {
+  align-items: baseline;
+  display: flex;
+  padding: 0 5px;
+}

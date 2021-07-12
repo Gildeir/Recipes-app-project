@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Carousel } from 'react-bootstrap';
+import '../css/detalhesBebidas.css';
+
 // import { Link } from 'react-router-dom';
 // import ContextRecipe from '../provider/ContextRecipe';
 import shareIcon from '../images/shareIcon.svg';
@@ -69,40 +71,53 @@ function DetalhesBebidas(props) {
       return null;
     }
     return (
-      <li
-        key={ index }
-        data-testid={ `${index}-ingredient-name-and-measure` }
-      >
-        {ingre.ingredient}
-        {' '}
-        {ingre.measure}
-      </li>);
+      <div className="list">
+        <li
+          key={ index }
+          data-testid={ `${index}-ingredient-name-and-measure` }
+        >
+          {ingre.measure}
+          {ingre.ingredient}
+          {' '}
+        </li>
+      </div>
+    );
   };
 
   return (
-    <section>
-      <h3>DetalhesBebidas</h3>
+    <section className="detalhes">
+      <h3 className="tituloDetalhes">Detalhes Bebidas</h3>
       <img
+        className="image-bebida"
         src={ ApiIdDetalhe.strDrinkThumb }
         data-testid="recipe-photo"
         alt="foto bebida"
         width="100px"
       />
       <p data-testid="recipe-title">{ApiIdDetalhe.strDrink}</p>
-      <img src={ shareIcon } alt="share" data-testid="share-btn" />
-      <input
-        type="image"
-        label="favorite"
-        src={ heartColor }
-        onClick={ () => funcHeartColor(ApiIdDetalhe, id) }
-        alt="heart"
-        width="25px"
-        data-testid="favorite-btn"
-      />
-      <p data-testid="recipe-category">{ApiIdDetalhe.strAlcoholic}</p>
-      <ol>
-        {ingredients.map((ingre, index) => (renderIngredient(ingre, index)))}
-      </ol>
+      <div className="icons">
+        <img
+          className="shareImg"
+          src={ shareIcon }
+          alt="share"
+          data-testid="share-btn"
+        />
+        <input
+          type="image"
+          label="favorite"
+          src={ heartColor }
+          onClick={ () => funcHeartColor(ApiIdDetalhe, id) }
+          alt="heart"
+          width="25px"
+          data-testid="favorite-btn"
+        />
+        <p data-testid="recipe-category">{ApiIdDetalhe.strAlcoholic}</p>
+      </div>
+      <div className="ol-list">
+        <ol>
+          {ingredients.map((ingre, index) => (renderIngredient(ingre, index)))}
+        </ol>
+      </div>
       <p data-testid="instructions">{ApiIdDetalhe.strInstructions}</p>
 
       <Carousel>

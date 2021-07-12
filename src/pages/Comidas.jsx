@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ContextRecipe from '../provider/ContextRecipe';
+import '../css/comidaBebida.css';
 
 function Comidas() {
   const {
@@ -67,6 +69,7 @@ function Comidas() {
       return (
         apiDataFood.map((iten, index) => (
           <li
+            className="liPrincipal"
             data-testid={ `${index}-recipe-card` }
             key={ index }
           >
@@ -75,7 +78,6 @@ function Comidas() {
                 <img
                   data-testid={ `${index}-card-img` }
                   src={ iten.strMealThumb }
-                  width="50px"
                   alt="food"
                 />
                 <p data-testid={ `${index}-card-name` }>{ iten.strMeal }</p>
@@ -87,6 +89,7 @@ function Comidas() {
     return (
       dataCategory.map((item, index) => (
         <li
+          className="liPrincipal"
           key={ index }
         >
           <div>
@@ -94,7 +97,6 @@ function Comidas() {
               <img
                 data-testid={ `${index}-card-img` }
                 src={ item.strMealThumb }
-                width="50px"
                 alt="food"
               />
               <p data-testid={ `${index}-card-name` }>{ item.strMeal }</p>
@@ -114,11 +116,12 @@ function Comidas() {
   };
 
   return (
-    <>
+    <div className="backimgfood">
       <Header dataCategory={ dataCategory } />
-      <div>
+      <div className="divButao">
         { categoryBtn.map((category) => (
-          <button
+          <Button
+            variant="outline-success"
             data-testid={ `${category.strCategory}-category-filter` }
             key={ category.strCategory }
             type="button"
@@ -127,26 +130,27 @@ function Comidas() {
             onClick={ ({ target }) => handleClick(target) }
           >
             { category.strCategory }
-          </button>
+          </Button>
         )) }
-        <button
+        <Button
+          variant="outline-success"
           data-testid="All-category-filter"
           key="all"
           type="button"
           name="all"
           value="all"
           onClick={ () => handleAllButton() }
-
         >
           All
-        </button>
+        </Button>
       </div>
       <ol>
         {apiDataFood === null ? alarm() : renderItens()}
         {direcionar()}
       </ol>
+      <div className="espaco" />
       <Footer />
-    </>
+    </div>
   );
 }
 
