@@ -5,3 +5,4 @@ src/provider/ProviderRecipe.js
 src/provider/ApiFunctions.js
 src/pages/ProgressoBebidas.jsx
 src/pages/ProgressoComidas.jsx
+src/components/Header.jsx

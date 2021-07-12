@@ -1,13 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Open+Sans:wght@300&display=swap');
+
+* {
+  font-family: Merienda, Verdana, Geneva, Tahoma, sans-serif;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Merienda , SourceSansPro-Regular , sans-serif;  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: Merienda, source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }

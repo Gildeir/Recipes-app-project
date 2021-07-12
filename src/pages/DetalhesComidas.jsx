@@ -79,6 +79,10 @@ function DetalhesComidas(props) {
       </li>);
   };
 
+  const youtube = () => (
+    ApiIdDetalhe.strYoutube !== undefined
+      ? ApiIdDetalhe.strYoutube.split('watch?v=').join('embed/') : '');
+
   return (
     <section>
       <h3>Detalhe Comida</h3>
@@ -105,9 +109,8 @@ function DetalhesComidas(props) {
       </ol>
       <p data-testid="instructions">{ApiIdDetalhe.strInstructions}</p>
       <iframe
-        width="560"
-        height="315"
-        src={ ApiIdDetalhe.strYoutube }
+        width="100%"
+        src={ youtube() }
         data-testid="video"
         title="YouTube video player"
       />
