@@ -16,34 +16,44 @@ Ao clicar no botão "Me Surpreenda!" da tela de explorar bebidas a rota muda par
   };
   return (
     <>
-      <h3 className="title-explore-food" data-testid="page-title">Explorar Comidas</h3>
       <Header title="Explorar Comidas" />
-      <Button
-        type="button"
-        data-testid="explore-by-ingredient"
-        label="Por Ingredientes"
-        onClick={ () => history.push('comidas/ingredientes') }
-      >
-        Por Ingredientes
-      </Button>
+      <div className="background-explore-food">
+        <h3 className="title-explore-food" data-testid="page-title">Explorar Comidas</h3>
+        <div className="all-buttons-explore-food">
+          <Button
+            className="button-explore-food"
+            variant="dark"
+            type="button"
+            data-testid="explore-by-ingredient"
+            label="Por Ingredientes"
+            onClick={ () => history.push('comidas/ingredientes') }
+          >
+            Por Ingredientes
+          </Button>
 
-      <Button
-        type="button"
-        data-testid="explore-by-area"
-        label="Por Local de Origem"
-        onClick={ () => history.push('comidas/area') }
-      >
-        Por Local de Origem
-      </Button>
+          <Button
+            className="button-explore-food "
+            variant="dark"
+            type="button"
+            data-testid="explore-by-area"
+            label="Por Local de Origem"
+            onClick={ () => history.push('comidas/area') }
+          >
+            Por Local de Origem
+          </Button>
 
-      <Button
-        type="button"
-        data-testid="explore-surprise"
-        label="Me Surpreenda!"
-        onClick={ () => meSurpreenda() }
-      >
-        Me Surpreenda!
-      </Button>
+          <Button
+            className="button-explore-food "
+            variant="dark"
+            type="button"
+            data-testid="explore-surprise"
+            label="Me Surpreenda!"
+            onClick={ () => meSurpreenda() }
+          >
+            Me Surpreenda!
+          </Button>
+        </div>
+      </div>
       <Footer />
     </>
   );

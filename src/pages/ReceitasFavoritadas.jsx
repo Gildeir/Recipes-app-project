@@ -46,7 +46,11 @@ function ReceitasFavoritadas() {
               />
               <p data-testid={ `${index}-horizontal-name` }>{ item.name }</p>
             </Link>
-            <p data-testid={ `${index}-horizontal-top-text` }>{item.alcoholicOrNot === '' ? '~~~~~~' : item.alcoholicOrNot}</p>
+            <p
+              data-testid={ `${index}-horizontal-top-text` }
+            >
+              {item.alcoholicOrNot === '' ? '~~~~~~' : item.alcoholicOrNot}
+            </p>
             <p data-testid={ `${index}-horizontal-top-text` }>
               {item.area}
               {' '}
@@ -91,7 +95,11 @@ function ReceitasFavoritadas() {
             />
             <p data-testid={ `${index}-horizontal-name` }>{ item.name }</p>
           </Link>
-          <p data-testid={ `${index}-horizontal-top-text` }>{item.alcoholicOrNot === '' ? '~~~~~~' : item.alcoholicOrNot}</p>
+          <p
+            data-testid={ `${index}-horizontal-top-text` }
+          >
+            {item.alcoholicOrNot === '' ? '~~~~~~' : item.alcoholicOrNot}
+          </p>
           <p data-testid={ `${index}-horizontal-top-text` }>
             {item.area}
             {' '}

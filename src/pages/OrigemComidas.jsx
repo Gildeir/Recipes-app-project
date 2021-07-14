@@ -66,7 +66,11 @@ function OrigemComidas() {
       </select>
       <ol>
         {comidaFiltrada === null ? null : comidaFiltrada.map((comida, index) => (
-          <li className="liPrincipal" key={ index } data-testid={ `${index}-recipe-card` }>
+          <li
+            className="liPrincipal"
+            key={ index }
+            data-testid={ `${index}-recipe-card` }
+          >
             <input
               type="image"
               src={ comida.strMealThumb }
