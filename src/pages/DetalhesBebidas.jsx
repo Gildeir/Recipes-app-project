@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Carousel } from 'react-bootstrap';
+import '../css/detalheBebidas.css';
+
 // import { Link } from 'react-router-dom';
 // import ContextRecipe from '../provider/ContextRecipe';
 import shareIcon from '../images/shareIcon.svg';
@@ -80,68 +82,83 @@ function DetalhesBebidas(props) {
   };
 
   return (
-    <section>
-      <h3>DetalhesBebidas</h3>
-      <img
-        src={ ApiIdDetalhe.strDrinkThumb }
-        data-testid="recipe-photo"
-        alt="foto bebida"
-        width="100px"
-      />
-      <p data-testid="recipe-title">{ApiIdDetalhe.strDrink}</p>
-      <img src={ shareIcon } alt="share" data-testid="share-btn" />
-      <input
-        type="image"
-        label="favorite"
-        src={ heartColor }
-        onClick={ () => funcHeartColor(ApiIdDetalhe, id) }
-        alt="heart"
-        width="25px"
-        data-testid="favorite-btn"
-      />
-      <p data-testid="recipe-category">{ApiIdDetalhe.strAlcoholic}</p>
-      <ol>
-        {ingredients.map((ingre, index) => (renderIngredient(ingre, index)))}
-      </ol>
-      <p data-testid="instructions">{ApiIdDetalhe.strInstructions}</p>
+    <div className="detalhes">
+      <section>
+        <h3 className="tituloDetalhes">Detalhes Bebidas</h3>
+        <div className="card">
+          <img
+            className="image-bebida"
+            src={ ApiIdDetalhe.strDrinkThumb }
+            data-testid="recipe-photo"
+            alt="foto bebida"
+            width="100px"
+          />
+          <p data-testid="recipe-title">{ApiIdDetalhe.strDrink}</p>
+        </div>
+        <div className="icons">
+          <img
+            className="shareImg"
+            src={ shareIcon }
+            alt="share"
+            data-testid="share-btn"
+          />
+          <input
+            type="image"
+            label="favorite"
+            src={ heartColor }
+            onClick={ () => funcHeartColor(ApiIdDetalhe, id) }
+            alt="heart"
+            width="25px"
+            data-testid="favorite-btn"
+          />
+          <p data-testid="recipe-category">{ApiIdDetalhe.strAlcoholic}</p>
+        </div>
+        <div className="ol-list">
+          <ol>
+            {ingredients.map((ingre, index) => (renderIngredient(ingre, index)))}
+          </ol>
+          <ol data-testid="instructions">{ApiIdDetalhe.strInstructions}</ol>
+        </div>
 
-      <Carousel>
-        {!recomandation
-          ? <p>Carregando...</p>
-          : recomandation.slice(0, six).map((drink, index) => (
-            <Carousel.Item
-              key={ index }
-              data-testid={ `${index}-recomendation-card` }
-            >
-              <img
-                className="carousel_image"
-                src={ drink.strMealThumb }
-                width="50px"
-                alt="foto comida RECOMENDADA"
-              />
-              <p>{drink.strArea}</p>
-              <p data-testid={ `${index}-recomendation-title` }>{drink.strMeal}</p>
-
-              <img
-                className="carousel_image"
-                src={ drink.strMealThumb }
-                width="50px"
-                alt="foto comida RECOMENDADA"
-              />
-              <p>{drink.strArea}</p>
-              <p data-testid={ `${index}-recomendation-title` }>{drink.strMeal}</p>
-            </Carousel.Item>))}
-      </Carousel>
-      <button
-        className="start-recipe-btn"
-        type="button"
-        data-testid="start-recipe-btn"
-        label="Iniciar Receita"
-        onClick={ historyURL }
-      >
-        INICIAR RECEITA
-      </button>
-    </section>
+        <Carousel className="carousel">
+          {!recomandation
+            ? <p>Carregando...</p>
+            : recomandation.slice(0, six).map((drink, index) => (
+              <Carousel.Item
+                key={ index }
+                data-testid={ `${index}-recomendation-card` }
+              >
+                <p data-testid={ `${index}-recomendation-title` }>{drink.strMeal}</p>
+                <img
+                  className="carousel_image"
+                  src={ drink.strMealThumb }
+                  width="50px"
+                  alt="foto comida RECOMENDADA"
+                />
+                <p>{drink.strArea}</p>
+                <p data-testid={ `${index}-recomendation-title` }>{drink.strMeal}</p>
+                <img
+                  className="carousel_image"
+                  src={ drink.strMealThumb }
+                  width="50px"
+                  alt="foto comida RECOMENDADA"
+                />
+                <p>{drink.strArea}</p>
+              </Carousel.Item>))}
+        </Carousel>
+      </section>
+      <div className="button-iniciar-receita">
+        <button
+          className="start-recipe-btn"
+          type="button"
+          data-testid="start-recipe-btn"
+          label="Iniciar Receita"
+          onClick={ historyURL }
+        >
+          INICIAR RECEITA
+        </button>
+      </div>
+    </div>
 
   );
 }

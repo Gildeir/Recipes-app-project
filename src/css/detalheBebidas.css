@@ -1,0 +1,83 @@
+.detalhes {
+  max-width: 500px;
+  min-height: 400px;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.tituloDetalhes {
+  box-shadow: 0 2px 6px #ad5525;
+  color: #ad5525;
+  margin: 50px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.card {
+  background-color: #ad5525;
+  box-shadow: 0 2px 6px #ad5525;
+  display: flex;
+  padding: 10px;
+  width: 200px;
+}
+
+.card p {
+  align-items: center;
+  background-color: #eeeae1;
+  border-radius: 0;
+  color: #ad5525;
+  width: 150px;
+}
+
+.image-bebida {
+  border: 2px solid #ad5525;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  width: 150px;
+}
+
+.detalhes p {
+  border-radius: 10%;
+  color: #ad5525;
+  flex-direction: column;
+}
+
+.ol-list ol {
+  box-shadow: 0 2px 6px #ad5525;
+  list-style: none;
+  text-align: left;
+  width: 80%;
+}
+
+.icons {
+  border-radius: 30px;
+  display: column;
+  padding: 10px;
+  width: 100px;
+}
+
+.shareImg {
+  margin: 10px;
+}
+
+.start-recipe-btn {
+  align-items: center;
+  background-color: #ad5525;
+  color: #eeeae1;
+  margin-left: -240px;
+  width: 480px;
+}
+
+.carousel {
+  box-shadow: 0 2px 6px #ad5525;
+  margin: 50px;
+}
+
+.carousel_image {
+  border-radius: 10%;
+  box-shadow: 0 2px 6px #ad5525;
+  margin-bottom: 10px;
+  width: 200px;
+}
+

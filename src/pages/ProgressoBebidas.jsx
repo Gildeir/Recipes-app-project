@@ -23,8 +23,14 @@ function ProgressoBebidas(props) {
     funcHeartColor,
     heartColor, setHeartColor, array, setArray, idHeart } = useContext(ContextRecipe);
   const [shareCopy, setShareCopy] = useState([false, '']);
-  console.log(`quantidade do array ${array.length}`);
-  console.log(`eu sou idHeart: ${idHeart}`);
+  const [complete, setComplete] = useState(true);
+
+
+  const handleComplete = ({value}) => {
+    console.log(array)
+    setArray([...array, value]);
+     setComplete(!complete)
+  }
 
   useEffect(() => {
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
@@ -69,15 +75,13 @@ function ProgressoBebidas(props) {
 
   const buttonAvaliable = () => {
     const ingreTela = document.getElementsByClassName('ingredientes').length;
-    console.log(`quantidade do igreTela ${ingreTela}`);
     if (ingreTela !== array.length || ingreTela === 0) {
       return true;
     }
     return false;
   };
-  console.log(buttonAvaliable());
   const renderIngredient = (ingre, index) => {
-    if (ingre.ingredient === null
+  if (ingre.ingredient === null
           || ingre.ingredient === ''
           || ingre.ingredient === undefined) {
       return null;
@@ -94,7 +98,10 @@ function ProgressoBebidas(props) {
             name={ ingre.ingredient }
             value={ ingre.ingredient }
             id={ ingre.ingredient }
-            onClick={ ({ target }) => setArray([...array, target.value]) }
+            onClick={ ({ target }) => handleComplete(target)}
+              
+
+             
           />
           <label htmlFor={ ingre.ingredient }>{ ingre.measure }</label>
         </div>
