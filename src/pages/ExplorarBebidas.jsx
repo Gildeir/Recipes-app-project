@@ -12,8 +12,8 @@ function ExplorarBebidas() {
   };
   return (
     <>
-      <p data-testid="page-title">Explorar Bebidas</p>
       <Header title="Explorar Bebidas" />
+      <p data-testid="page-title">Explorar Bebidas</p>
       <button
         type="button"
         data-testid="explore-by-ingredient"

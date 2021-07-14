@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 // import ContextRecipe from '../provider/ContextRecipe';
+import '../css/comidaBebida.css';
 
 function OrigemComidas() {
   const [areas, setAreas] = useState([]);
@@ -47,7 +48,7 @@ function OrigemComidas() {
   return (
     <div>
       <Header />
-      <p data-testid="page-title">Explorar Origem</p>
+      <p className="title" data-testid="page-title">Explorar Origem</p>
       <select
         data-testid="explore-by-area-dropdown"
         onChange={ ({ target }) => showItens(target) }
@@ -63,18 +64,22 @@ function OrigemComidas() {
           </option>
         ))}
       </select>
-      {comidaFiltrada === null ? null : comidaFiltrada.map((comida, index) => (
-        <div key={ index } data-testid={ `${index}-recipe-card` }>
-          <input
-            type="image"
-            src={ comida.strMealThumb }
-            data-testid={ `${index}-card-img` }
-            alt="comida"
-            onClick={ () => history.push(`/comidas/${comida.idMeal}`) }
-          />
-          <p data-testid={ `${index}-card-name` }>{comida.strMeal}</p>
-        </div>
-      ))}
+      <ol>
+        {comidaFiltrada === null ? null : comidaFiltrada.map((comida, index) => (
+          <li className="liPrincipal" key={ index } data-testid={ `${index}-recipe-card` }>
+            <input
+              type="image"
+              src={ comida.strMealThumb }
+              data-testid={ `${index}-card-img` }
+              alt="comida"
+              width="160px"
+              onClick={ () => history.push(`/comidas/${comida.idMeal}`) }
+            />
+            <p data-testid={ `${index}-card-name` }>{comida.strMeal}</p>
+          </li>
+        ))}
+      </ol>
+      <div className="espaco" />
       <Footer />
     </div>
   );

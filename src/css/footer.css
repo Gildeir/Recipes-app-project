@@ -1,9 +1,5 @@
-.footer-container {
-  background-color: #003629;
-
-}
-
 .footer {
+  background-color: #9aa6ad;
   bottom: 0;
   display: flex;
   justify-content: space-between;

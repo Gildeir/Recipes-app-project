@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Carousel } from 'react-bootstrap';
-import '../css/detalheBebidas.css';
-
+// import { Carousel } from 'react-bootstrap';
+import '../css/paginaDetalhe.css';
 // import { Link } from 'react-router-dom';
 // import ContextRecipe from '../provider/ContextRecipe';
 import shareIcon from '../images/shareIcon.svg';
@@ -71,14 +70,17 @@ function DetalhesBebidas(props) {
       return null;
     }
     return (
-      <li
-        key={ index }
-        data-testid={ `${index}-ingredient-name-and-measure` }
-      >
-        {ingre.ingredient}
-        {' '}
-        {ingre.measure}
-      </li>);
+      <div className="list">
+        <li
+          key={ index }
+          data-testid={ `${index}-ingredient-name-and-measure` }
+        >
+          {ingre.measure}
+          {ingre.ingredient}
+          {' '}
+        </li>
+      </div>
+    );
   };
 
   return (
@@ -120,32 +122,26 @@ function DetalhesBebidas(props) {
           <ol data-testid="instructions">{ApiIdDetalhe.strInstructions}</ol>
         </div>
 
-        <Carousel className="carousel">
-          {!recomandation
-            ? <p>Carregando...</p>
-            : recomandation.slice(0, six).map((drink, index) => (
-              <Carousel.Item
-                key={ index }
-                data-testid={ `${index}-recomendation-card` }
-              >
-                <p data-testid={ `${index}-recomendation-title` }>{drink.strMeal}</p>
-                <img
-                  className="carousel_image"
-                  src={ drink.strMealThumb }
-                  width="50px"
-                  alt="foto comida RECOMENDADA"
-                />
-                <p>{drink.strArea}</p>
-                <p data-testid={ `${index}-recomendation-title` }>{drink.strMeal}</p>
-                <img
-                  className="carousel_image"
-                  src={ drink.strMealThumb }
-                  width="50px"
-                  alt="foto comida RECOMENDADA"
-                />
-                <p>{drink.strArea}</p>
-              </Carousel.Item>))}
-        </Carousel>
+        <ol>
+          <div className="carrousel">
+            {!recomandation
+              ? <p>Carregando...</p>
+              : recomandation.slice(0, six).map((drink, index) => (
+                <li
+                  key={ index }
+                  data-testid={ `${index}-recomendation-card` }
+                >
+                  <p data-testid={ `${index}-recomendation-title` }>{drink.strMeal}</p>
+                  <img
+                    className="carousel_image"
+                    src={ drink.strMealThumb }
+                    width="50px"
+                    alt="foto comida RECOMENDADA"
+                  />
+                  <p>{drink.strArea}</p>
+                </li>))}
+          </div>
+        </ol>
       </section>
       <div className="button-iniciar-receita">
         <button

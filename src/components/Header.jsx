@@ -44,18 +44,7 @@ function Header() {
   };
 
   const searchBtn = () => {
-    if (location.pathname === '/comidas') {
-      return (
-        <input
-          type="image"
-          src={ searchIcon }
-          data-testid="search-top-btn"
-          alt="search icon"
-          onClick={ () => handleSearch() }
-        />
-      );
-    }
-    if (location.pathname === '/bebidas') {
+    if (location.pathname === '/comidas' || location.pathname === '/bebidas' || location.pathname === '/explorar/comidas/area') {
       return (
         <input
           type="image"
@@ -71,32 +60,30 @@ function Header() {
   return (
     <div>
 
-      <header className="header_bar">
-        <section>
-          <Link to="/perfil">
-            <input
-              type="image"
-              alt="profile icon"
-              src={ profileIcon }
-              data-testid="profile-top-btn"
-            />
-          </Link>
-
-          {/* <h3 data-testid="page-title">Comidas</h3> */}
-          {ChangeTitle()}
-          {searchBtn()}
-
+      <header>
+        <section className="header_bar">
+          <div className="up-inputs-header">
+            <Link to="/perfil">
+              <input
+                type="image"
+                alt="profile icon"
+                src={ profileIcon }
+                data-testid="profile-top-btn"
+              />
+            </Link>
+            {ChangeTitle()}
+            {searchBtn()}
+          </div>
+          <div className="down-input-header">
           {enableSearch === true ? <input
+            className="search-input-header"
             type="text"
             data-testid="search-input"
             label="inputIngredients"
             alt="search input"
             onChange={ ({ target }) => filterSearch(target) }
           /> : null }
-          <br />
-
           <label htmlFor="Ingrediente" className="radiobtn-header">
-            {' '}
             Ingrediente
             <input
               className="radiobtn-header"
@@ -131,15 +118,19 @@ function Header() {
               onChange={ handleFilter }
             />
           </label>
-          <Button
-            variant="dark"
-            type="button"
-            data-testid="exec-search-btn"
-            label="Buscar"
-            onClick={ () => alertZeroFound() }
-          >
-            Buscar
-          </Button>
+          <div className="cliqlupa">
+            <p>Clique na lupa e digite sua busca</p>
+            <Button
+              variant="dark"
+              type="button"
+              data-testid="exec-search-btn"
+              label="Buscar"
+              onClick={ () => alertZeroFound() }
+            >
+              Buscar
+            </Button>
+          </div>
+          </div>
 
         </section>
       </header>

@@ -1,0 +1,29 @@
+.button-profile {
+  font-size: 20px;
+  height: 60px;
+  margin-bottom: 50px;
+  margin-left: 10px;
+  text-align: center;
+  width: 60%;
+}
+
+.all-buttons-profile {
+  margin-top: 70px;
+  text-align: center;
+}
+
+.profile-email {
+  background-color: #8a9aa5;
+  border: 1px solid #282c32;
+  color: white;
+  height: 50px;
+  line-height: 50px;
+  padding: auto;
+  text-align: center;
+}
+
+.background-profile {
+  background-color: black;
+  background-image: url(../images/capaLogin.jpeg);
+  height: 500px;
+}

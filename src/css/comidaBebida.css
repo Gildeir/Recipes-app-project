@@ -1,0 +1,78 @@
+/* este css abaixo é para todas as listas que renderiza comida ou bebidas */
+ol {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+}
+
+li img {
+  width: 160px;
+}
+
+.liPrincipal {
+  background-color: #34363a;
+  border-radius: 10%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.liPrincipal p {
+  color: white;
+  margin-top: 10px;
+  max-height: 20px;
+  max-width: 150px;
+  overflow: scroll;
+  text-decoration: none;
+}
+
+/* <a href="/" style="text-decoration:none"Texto do link</a> */
+.liPrincipal p:hover {
+  background-color: rgb(240, 137, 89);
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.espaco {
+  padding: 10px;
+}
+
+/* botoes */
+.divButao {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.divButao button {
+  height: 85px;
+  margin: 10px;
+  width: 100px;
+}
+
+.backimgbebida {
+  background-image: url('../images/backgroundDrinks.png');
+}
+
+.backimgfood {
+  background-image: url('../images/backgroundFood.png');
+}
+
+/* este css acima é para todas as listas que renderiza comida ou bebidas */
+
+/* exclusivo dos titulos do explorar */
+.title {
+  color: black;
+  font-size: large;
+  margin-top: 5px;
+  text-align: center;
+}
+
+/* exclusivo dos titulos do explorar */
+
+/* esclusivo dos favoritos */

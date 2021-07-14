@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ContextRecipe from '../provider/ContextRecipe';
+import '../css/comidaBebida.css';
 
 function IngredientesComidas() {
   const history = useHistory();
@@ -31,24 +32,28 @@ function IngredientesComidas() {
   return (
     <>
       <Header />
-      <p data-testid="page-title">Explorar Ingredientes</p>
-      { ingredientes.map((ingredient, index) => (
-        <div
-          key={ index }
-          data-testid={ `${index}-ingredient-card` }
-        >
-          <input
-            type="image"
-            data-testid={ `${index}-card-img` }
-            alt="ingredient"
-            src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
-            width="5%"
-            name={ ingredient.strIngredient }
-            onClick={ ({ target }) => searchByIngredient(target) }
-          />
-          <p data-testid={ `${index}-card-name` }>{ingredient.strIngredient}</p>
-        </div>
-      ))}
+      <p className="title" data-testid="page-title">Explorar Ingredientes</p>
+      <ol>
+        { ingredientes.map((ingredient, index) => (
+          <li
+            className="liPrincipal"
+            key={ index }
+            data-testid={ `${index}-ingredient-card` }
+          >
+            <input
+              width="160px"
+              type="image"
+              data-testid={ `${index}-card-img` }
+              alt="ingredient"
+              src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
+              name={ ingredient.strIngredient }
+              onClick={ ({ target }) => searchByIngredient(target) }
+            />
+            <p data-testid={ `${index}-card-name` }>{ingredient.strIngredient}</p>
+          </li>
+        ))}
+      </ol>
+      <div className="espaco" />
       <Footer />
     </>
   );
