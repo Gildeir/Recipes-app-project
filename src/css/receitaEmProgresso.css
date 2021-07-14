@@ -1,0 +1,84 @@
+.in-progree-page {
+  color: #8e716c;
+  margin: 10px;
+}
+
+.in-progree-page, h4 {
+  box-shadow: 0 2px 6px #8e716c;
+  color: #8e716c;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.first-title {
+  box-shadow: 0 2px 6px #8e716c;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.recipe-photo-father {
+  display: flex;
+  margin-top: 10px;
+  padding: 20px 20px 0;
+}
+
+.recipe-photo {
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  height: 250px;
+  width: 250px;
+}
+
+.recipe-name-father {
+  display: flex;
+}
+
+.recipe-name {
+  align-items: center;
+  background-color: #35373a;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+  color: #eeeae1;
+  height: 40px;
+  width: 250px;
+
+}
+
+.inProgress {
+  border: green 5px solid;
+}
+
+.ingredientes {
+  background-color: #eeeae1;
+  box-shadow: 0 2px 6px #8e716c;
+  color: #8e716c;
+  padding: 10px;
+}
+
+.icons-progress {
+  align-items: center;
+  box-shadow: 0 2px 6px #8e716c;
+  color: #8e716c;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.instrucao-text {
+  box-shadow: 0 2px 6px #8e716c;
+}
+
+.start-recipe-btn-father-progress {
+  display: flex;
+}
+
+.start-recipe-btn-progress {
+  align-items: center;
+  background-color: #8e716c;
+  box-shadow: 0 2px 6px #8e716c;
+  color: #eeeae1;
+  display: flex;
+}
+

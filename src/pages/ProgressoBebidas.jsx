@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
+import '../css/receitaEmProgresso.css';
 import PropTypes from 'prop-types';
 import ContextRecipe from '../provider/ContextRecipe';
-
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -15,7 +15,6 @@ function copyLink(index, setIndex) {
     );
   }
 }
-
 function ProgressoBebidas(props) {
   const { match: { params: { id } } } = props;
   const { ApiIdDetalhe,
@@ -99,9 +98,6 @@ function ProgressoBebidas(props) {
             value={ ingre.ingredient }
             id={ ingre.ingredient }
             onClick={ ({ target }) => handleComplete(target)}
-              
-
-             
           />
           <label htmlFor={ ingre.ingredient }>{ ingre.measure }</label>
         </div>
@@ -110,56 +106,67 @@ function ProgressoBebidas(props) {
   };
 
   return (
-    <>
-      <img
-        src={ ApiIdDetalhe.strDrinkThumb || ApiIdDetalhe.strMealThumb }
-        data-testid="recipe-photo"
-        alt="Thumbnail"
-      />
-      <h1 data-testid="recipe-title">
-        { ApiIdDetalhe.strDrinkThumb || ApiIdDetalhe.strMealThumb }
-      </h1>
-      <input
-        type="image"
-        src={ shareIcon }
-        alt="share"
-        data-testid="share-btn"
-        onClick={ () => setShareCopy(true) || copy((`http://localhost:3000/bebidas/${id}`)) }
-      />
-      {shareCopy ? copyLink(shareCopy[1]) : null}
+    <div className="in-progree-page">
+      <h3 className="first-title">Recipe in Progress</h3>
+      <div className="recipe-photo-father">
+        <img
+          className="recipe-photo"
+          src={ ApiIdDetalhe.strDrinkThumb || ApiIdDetalhe.strMealThumb }
+          data-testid="recipe-photo"
+          alt="Thumbnail"
+        />
+      </div>
+      <div className="recipe-name-father">
+        <p className="recipe-name" data-testid="recipe-title">
+          { ApiIdDetalhe.strDrink || ApiIdDetalhe.strMeal}
+        </p>
+      </div>
+      <div className="icons-progress">
+        <input
+          type="image"
+          src={ shareIcon }
+          alt="share"
+          data-testid="share-btn"
+          onClick={ () => setShareCopy(true) || copy((`http://localhost:3000/bebidas/${id}`)) }
+        />
+        {shareCopy ? copyLink(shareCopy[1]) : null}
 
-      {/* botão de favoritar */}
-      <input
-        type="image"
-        label="favorite"
-        src={ heartColor }
-        onClick={ () => funcHeartColor(ApiIdDetalhe, id) }
-        alt="heart"
-        width="25px"
-        data-testid="favorite-btn"
-      />
-      <h5 data-testid="recipe-category">
-        {ApiIdDetalhe.strAlcoholic ? ApiIdDetalhe.strAlcoholic : ApiIdDetalhe.strCategory}
-      </h5>
-      <h2>Ingredientes</h2>
+        {/* botão de favoritar */}
+        <input
+          type="image"
+          label="favorite"
+          src={ heartColor }
+          onClick={ () => funcHeartColor(ApiIdDetalhe, id) }
+          alt="heart"
+          width="25px"
+          data-testid="favorite-btn"
+        />
+     
+        <h5 data-testid="recipe-category">
+          {ApiIdDetalhe.strAlcoholic ? ApiIdDetalhe.strAlcoholic : ApiIdDetalhe.strCategory}
+        </h5>
+       </div>
+      <h4>Ingredientes</h4>
       {ingredients.map((ingre, index) => renderIngredient(ingre, index))}
 
       {/* texto da categoria */}
-      <h2>Instruções</h2>
-      <p data-testid="instructions">{ApiIdDetalhe.strInstructions}</p>
+      <h4>Instruções</h4>
+      <p className="instrucao-text" data-testid="instructions">{ApiIdDetalhe.strInstructions}</p>
 
       {/* botão para finalizar */}
-      <button
-        data-testid="finish-recipe-btn"
-        label="Finalizar a Receita"
-        type="button"
-        disabled={ buttonAvaliable() }
-        onClick={ {} }
-      >
-        Finalizar Receita
-      </button>
+      <div className="start-recipe-btn-father-progress">
+        <button className="start-recipe-btn-progress"
+          data-testid="finish-recipe-btn"
+          label="Finalizar a Receita"
+          type="button"
+          disabled={ buttonAvaliable() }
+          onClick={ {} }
+        >
+          Finalizar Receita
+        </button>
+      </div>
 
-    </>
+    </div>
   );
 }
 
