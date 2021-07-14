@@ -32,7 +32,12 @@
 }
 
 .recipe-name-father {
+  background-color: #35373a;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
   display: flex;
+  margin-bottom: 10px;
+  width: 250px;
 }
 
 .recipe-name {
@@ -41,9 +46,9 @@
   border-bottom-left-radius: 10%;
   border-bottom-right-radius: 10%;
   color: #eeeae1;
+  display: flex;
   height: 40px;
-  width: 250px;
-
+  text-align: center;
 }
 
 .inProgress {
@@ -57,13 +62,21 @@
   padding: 10px;
 }
 
+.just-icons input {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .icons-progress {
   align-items: center;
+  border-radius: 10%;
   box-shadow: 0 2px 6px #8e716c;
   color: #8e716c;
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
+  max-width: 150px;
+  padding: 10px;
 }
 
 .instrucao-text {
@@ -72,6 +85,7 @@
 
 .start-recipe-btn-father-progress {
   display: flex;
+  justify-content: center;
 }
 
 .start-recipe-btn-progress {

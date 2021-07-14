@@ -122,25 +122,27 @@ function ProgressoBebidas(props) {
         </p>
       </div>
       <div className="icons-progress">
-        <input
-          type="image"
-          src={ shareIcon }
-          alt="share"
-          data-testid="share-btn"
-          onClick={ () => setShareCopy(true) || copy((`http://localhost:3000/bebidas/${id}`)) }
-        />
-        {shareCopy ? copyLink(shareCopy[1]) : null}
+        <div className="just-icons">
+          <input
+            type="image"
+            src={ shareIcon }
+            alt="share"
+            data-testid="share-btn"
+            onClick={ () => setShareCopy(true) || copy((`http://localhost:3000/bebidas/${id}`)) }
+          />
+          {shareCopy ? copyLink(shareCopy[1]) : null}
 
-        {/* botão de favoritar */}
-        <input
-          type="image"
-          label="favorite"
-          src={ heartColor }
-          onClick={ () => funcHeartColor(ApiIdDetalhe, id) }
-          alt="heart"
-          width="25px"
-          data-testid="favorite-btn"
-        />
+          {/* botão de favoritar */}
+          <input
+            type="image"
+            label="favorite"
+            src={ heartColor }
+            onClick={ () => funcHeartColor(ApiIdDetalhe, id) }
+            alt="heart"
+            width="25px"
+            data-testid="favorite-btn"
+          />
+        </div>
      
         <h5 data-testid="recipe-category">
           {ApiIdDetalhe.strAlcoholic ? ApiIdDetalhe.strAlcoholic : ApiIdDetalhe.strCategory}
