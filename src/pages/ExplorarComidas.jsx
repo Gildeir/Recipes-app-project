@@ -1,7 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import '../css/explorarComidas.css';
 
 function ExplorarComidas() {
   /* Ao clicar no botão "Me Surpreenda!" da tela de explorar comidas a rota muda para a página de detalhes de uma comida aleatória obtida através do endpoint https://www.themealdb.com/api/json/v1/1/random.php;
@@ -14,34 +16,34 @@ Ao clicar no botão "Me Surpreenda!" da tela de explorar bebidas a rota muda par
   };
   return (
     <>
-      <p data-testid="page-title">Explorar Comidas</p>
+      <h3 className="title-explore-food" data-testid="page-title">Explorar Comidas</h3>
       <Header title="Explorar Comidas" />
-      <button
+      <Button
         type="button"
         data-testid="explore-by-ingredient"
         label="Por Ingredientes"
         onClick={ () => history.push('comidas/ingredientes') }
       >
         Por Ingredientes
-      </button>
+      </Button>
 
-      <button
+      <Button
         type="button"
         data-testid="explore-by-area"
         label="Por Local de Origem"
         onClick={ () => history.push('comidas/area') }
       >
         Por Local de Origem
-      </button>
+      </Button>
 
-      <button
+      <Button
         type="button"
         data-testid="explore-surprise"
         label="Me Surpreenda!"
         onClick={ () => meSurpreenda() }
       >
         Me Surpreenda!
-      </button>
+      </Button>
       <Footer />
     </>
   );

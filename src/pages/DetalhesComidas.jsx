@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Carousel } from 'react-bootstrap';
+// import { Carousel } from 'react-bootstrap';
 import ContextRecipe from '../provider/ContextRecipe';
 // import RecomendationFood from '../components/RecomendationFood';
 // import { Link } from 'react-router-dom';
@@ -9,8 +9,7 @@ import ContextRecipe from '../provider/ContextRecipe';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-
-import '../css/barraRolagem.css';
+import '../css/paginaDetalhe.css';
 
 function DetalhesComidas(props) {
   const { heartColor, setHeartColor,
@@ -84,72 +83,77 @@ function DetalhesComidas(props) {
       ? ApiIdDetalhe.strYoutube.split('watch?v=').join('embed/') : '');
 
   return (
-    <section>
-      <h3>Detalhe Comida</h3>
-      <img
-        src={ ApiIdDetalhe.strMealThumb }
-        data-testid="recipe-photo"
-        alt="foto bebida"
-        width="100px"
-      />
-      <p data-testid="recipe-title">{ApiIdDetalhe.strMeal}</p>
-      <img src={ shareIcon } alt="share" data-testid="share-btn" />
-      <input
-        type="image"
-        label="favorite"
-        src={ heartColor }
-        onClick={ () => funcHeartColor(ApiIdDetalhe, id) }
-        alt="heart"
-        width="25px"
-        data-testid="favorite-btn"
-      />
-      <p data-testid="recipe-category">{ApiIdDetalhe.strCategory}</p>
-      <ol>
-        {ingredients.map((ingre, index) => (renderIngredient(ingre, index)))}
-      </ol>
-      <p data-testid="instructions">{ApiIdDetalhe.strInstructions}</p>
-      <iframe
-        width="100%"
-        src={ youtube() }
-        data-testid="video"
-        title="YouTube video player"
-      />
+    <div className="detalhes">
+      <section>
+        <h3 className="tituloDetalhes">Detalhe Comida</h3>
+        <div className="card">
+          <img
+            className="image-bebida"
+            src={ ApiIdDetalhe.strMealThumb }
+            data-testid="recipe-photo"
+            alt="foto bebida"
+            width="100px"
+          />
+          <p data-testid="recipe-title">{ApiIdDetalhe.strMeal}</p>
+        </div>
+        <div className="icons">
+          <img
+            className="shareImg"
+            src={ shareIcon }
+            alt="share"
+            data-testid="share-btn" />
+          <input
+            type="image"
+            label="favorite"
+            src={ heartColor }
+            onClick={ () => funcHeartColor(ApiIdDetalhe, id) }
+            alt="heart"
+            width="25px"
+            data-testid="favorite-btn"
+          />
+          <p data-testid="recipe-category">{ApiIdDetalhe.strCategory}</p>
+        </div>
+        <div className="ol-list">
+          <ol>
+            {ingredients.map((ingre, index) => (renderIngredient(ingre, index)))}
+          </ol>
+          <ol data-testid="instructions">{ApiIdDetalhe.strInstructions}</ol>
+        </div>
 
-      <Carousel>
-        {recomandation.slice(0, six).map((drink, index) => (
-          <Carousel.Item key={ index } data-testid={ `${index}-recomendation-card` }>
-            <img
-              className="carousel_image"
-              src={ drink.strDrinkThumb }
-              width="50px"
-              alt="foto comida RECOMENDADA"
-            />
-            <p>{drink.strAlcoholic}</p>
-            <p data-testid={ `${index}-recomendation-title` }>{drink.strDrink}</p>
-
-            <img
-              className="carousel_image"
-              src={ drink.strDrinkThumb }
-              width="50px"
-              alt="foto comida RECOMENDADA"
-            />
-            <p>{drink.strAlcoholic}</p>
-            <p data-testid={ `${index}-recomendation-title` }>{drink.strDrink}</p>
-
-            {/* <RecomendationFood key={ index } drink={ drink } /> */}
-          </Carousel.Item>))}
-      </Carousel>
-
-      <button
-        className="start-recipe-btn"
-        type="button"
-        data-testid="start-recipe-btn"
-        label="Iniciar Receita"
-        onClick={ historyURL }
-      >
-        INICIAR RECEITA
-      </button>
-    </section>
+        <iframe
+          className="iframe"
+          width="100%"
+          src={ youtube() }
+          data-testid="video"
+          title="YouTube video player"
+        />
+        <ol>
+          <div className="carrousel">
+            {recomandation.slice(0, six).map((drink, index) => (
+              <li key={ index } data-testid={ `${index}-recomendation-card` }>
+                <img
+                  className="carousel_image"
+                  src={ drink.strDrinkThumb }
+                  alt="foto comida RECOMENDADA"
+                />
+                <p>{drink.strAlcoholic}</p>
+                <p data-testid={ `${index}-recomendation-title` }>{drink.strDrink}</p>
+              </li>))}
+          </div>
+        </ol>
+      </section>
+      <div className="button-iniciar-receita">
+        <button
+          className="start-recipe-btn"
+          type="button"
+          data-testid="start-recipe-btn"
+          label="Iniciar Receita"
+          onClick={ historyURL }
+        >
+          INICIAR RECEITA
+        </button>
+      </div>
+    </div>
 
   );
 }

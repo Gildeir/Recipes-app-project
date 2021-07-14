@@ -1,0 +1,28 @@
+ol {
+  margin-top: 20px;
+}
+
+.liInicial {
+  background-color: #434446;
+  border-radius: 10%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  max-width: 160px;
+  min-height: 250px;
+  text-align: center;
+}
+
+.liInicial p {
+  color: white;
+  font-size: 15px;
+  margin-top: 10px;
+  max-height: 10px;
+  /* overflow: scroll; */
+  text-decoration: none;
+}
+
+.liInicial div > input {
+  margin-left: 10px;
+  margin-right: 10px;
+}

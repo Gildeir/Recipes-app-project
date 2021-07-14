@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
+import { Button } from 'react-bootstrap';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import '../css/profile.css';
 
 function Perfil() {
   const [user] = useState(JSON.parse(localStorage.getItem('user')) || '{}');
@@ -9,37 +11,46 @@ function Perfil() {
   return (
     <>
       <Header title="Perfil" disableBtn />
-      <p data-testid="profile-email">
-        Email:
-        { user.email }
-      </p>
+      <div className="background-profile">
+        <p data-testid="profile-email" className="profile-email">
+          Email:
+          { user.email }
+        </p>
+        <div className="all-buttons-profile">
+          <Button
+            className="button-profile"
+            variant="dark"
+            label="Receitas Feitas"
+            data-testid="profile-done-btn"
+            type="button"
+            onClick={ () => history.push('/receitas-feitas') }
+          >
+            Receitas Feitas
+          </Button>
 
-      <button
-        label="Receitas Feitas"
-        data-testid="profile-done-btn"
-        type="button"
-        onClick={ () => history.push('/receitas-feitas') }
-      >
-        Receitas Feitas
-      </button>
+          <Button
+            className="button-profile"
+            variant="dark"
+            label="Receitas Favoritas"
+            data-testid="profile-favorite-btn"
+            type="button"
+            onClick={ () => history.push('/receitas-favoritas') }
+          >
+            Receitas Favoritas
+          </Button>
 
-      <button
-        label="Receitas Favoritas"
-        data-testid="profile-favorite-btn"
-        type="button"
-        onClick={ () => history.push('/receitas-favoritas') }
-      >
-        Receitas Favoritas
-      </button>
-
-      <button
-        label="Sair"
-        data-testid="profile-logout-btn"
-        type="button"
-        onClick={ () => localStorage.clear() || history.push('/') }
-      >
-        Sair
-      </button>
+          <Button
+            className="button-profile"
+            variant="dark"
+            label="Sair"
+            data-testid="profile-logout-btn"
+            type="button"
+            onClick={ () => localStorage.clear() || history.push('/') }
+          >
+            Sair
+          </Button>
+        </div>
+      </div>
 
       <Footer />
     </>

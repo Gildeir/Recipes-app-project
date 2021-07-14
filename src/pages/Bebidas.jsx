@@ -125,7 +125,7 @@ function Bebidas() {
       <div className="divButao">
         { categoryBtn.map((category) => (
           <Button
-            variant="outline-success"
+            variant="outline-dark"
             data-testid={ `${category.strCategory}-category-filter` }
             key={ category.strCategory }
             type="button"
@@ -138,7 +138,7 @@ function Bebidas() {
           </Button>
         )) }
         <Button
-          variant="outline-success"
+          variant="outline-dark"
           data-testid="All-category-filter"
           key="all"
           type="button"

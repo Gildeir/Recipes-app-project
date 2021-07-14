@@ -44,18 +44,7 @@ function Header() {
   };
 
   const searchBtn = () => {
-    if (location.pathname === '/comidas') {
-      return (
-        <input
-          type="image"
-          src={ searchIcon }
-          data-testid="search-top-btn"
-          alt="search icon"
-          onClick={ () => handleSearch() }
-        />
-      );
-    }
-    if (location.pathname === '/bebidas') {
+    if (location.pathname === '/comidas' || location.pathname === '/bebidas' || location.pathname === '/explorar/comidas/area') {
       return (
         <input
           type="image"

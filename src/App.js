@@ -56,6 +56,7 @@ function App() {
       <Route path="/perfil" component={ Perfil } />
       <Route path="/receitas-feitas" component={ ReceitasFeitas } />
       <Route path="/receitas-favoritas" component={ ReceitasFavoritadas } />
+      {/* <Route path='*' component={ NotFound } */}
     </ProviderRecipes>
   );
 }

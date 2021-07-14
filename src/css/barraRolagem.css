@@ -1,4 +1,4 @@
-.barraRolagem {
+/* .barraRolagem {
   display: flex;
   overflow-x: scroll;
   padding: 0;
@@ -20,7 +20,7 @@
 
 .carousel_image {
   text-align: center;
-  width: 20%;
+  width: 10px;
 }
 
 .start-recipe-btn {
@@ -32,4 +32,17 @@
 
 .carousel-control-next-icon {
   background-color: black;
+} */
+
+.carrousel {
+  display: flex;
+  overflow-x: scroll;
+  padding: 5px;
+  text-align: center;
+  width: 2100px;
+}
+
+.carrousel li {
+  padding: 7px;
+  width: 100%;
 }

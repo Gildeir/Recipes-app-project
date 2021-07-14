@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ContextRecipe from '../provider/ContextRecipe';
+import '../css/comidaBebida.css';
 
 function IngredientesBebidas() {
   const history = useHistory();
@@ -32,24 +33,28 @@ function IngredientesBebidas() {
   return (
     <>
       <Header />
-      <p data-testid="page-title">Explorar Ingredientes</p>
-      { ingredientes.map((ingredient, index) => (
-        <div
-          key={ index }
-          data-testid={ `${index}-ingredient-card` }
-        >
-          <input
-            type="image"
-            data-testid={ `${index}-card-img` }
-            alt="ingredient"
-            src={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png` }
-            width="5%"
-            name={ ingredient.strIngredient1 }
-            onClick={ ({ target }) => searchByIngredient(target) }
-          />
-          <p data-testid={ `${index}-card-name` }>{ingredient.strIngredient1}</p>
-        </div>
-      ))}
+      <p className="title" data-testid="page-title">Explorar Ingredientes</p>
+      <ol>
+        { ingredientes.map((ingredient, index) => (
+          <li
+            className="liPrincipal"
+            key={ index }
+            data-testid={ `${index}-ingredient-card` }
+          >
+            <input
+              type="image"
+              data-testid={ `${index}-card-img` }
+              alt="ingredient"
+              src={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png` }
+              width="160px"
+              name={ ingredient.strIngredient1 }
+              onClick={ ({ target }) => searchByIngredient(target) }
+            />
+            <p data-testid={ `${index}-card-name` }>{ingredient.strIngredient1}</p>
+          </li>
+        ))}
+      </ol>
+      <div className="espaco" />
       <Footer />
     </>
   );

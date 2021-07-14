@@ -1,3 +1,4 @@
+/* este css abaixo é para todas as listas que renderiza comida ou bebidas */
 ol {
   display: flex;
   flex-wrap: wrap;
@@ -61,3 +62,17 @@ a:link {
 .backimgfood {
   background-image: url('../images/backgroundFood.png');
 }
+
+/* este css acima é para todas as listas que renderiza comida ou bebidas */
+
+/* exclusivo dos titulos do explorar */
+.title {
+  color: black;
+  font-size: large;
+  margin-top: 5px;
+  text-align: center;
+}
+
+/* exclusivo dos titulos do explorar */
+
+/* esclusivo dos favoritos */
