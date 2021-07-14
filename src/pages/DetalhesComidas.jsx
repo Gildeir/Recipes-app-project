@@ -101,7 +101,8 @@ function DetalhesComidas(props) {
             className="shareImg"
             src={ shareIcon }
             alt="share"
-            data-testid="share-btn" />
+            data-testid="share-btn"
+          />
           <input
             type="image"
             label="favorite"

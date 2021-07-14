@@ -37,4 +37,5 @@ body, html {
   height: 130px;
   margin-bottom: 480px;
   position: absolute;
+  text-shadow: 0 2px 6px black;
 }

@@ -1,7 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import '../css/explorarBebidas.css';
 
 function ExplorarBebidas() {
   const history = useHistory();
@@ -10,27 +12,36 @@ function ExplorarBebidas() {
       .then((response) => response.json())
       .then(({ drinks }) => history.push(`/bebidas/${drinks[0].idDrink}`));
   };
+
   return (
     <>
       <Header title="Explorar Bebidas" />
-      <p data-testid="page-title">Explorar Bebidas</p>
-      <button
-        type="button"
-        data-testid="explore-by-ingredient"
-        label="Por Ingredientes"
-        onClick={ () => history.push('bebidas/ingredientes') }
-      >
-        Por Ingredientes
-      </button>
+      <div className="background-explore-drink">
+        <h3 data-testid="page-title" className="title-explore-drink">Explorar Bebidas</h3>
+        <div className="all-buttons-explore-drink">
+          <Button
+            className="button-explore-drink"
+            variant="dark"
+            type="button"
+            data-testid="explore-by-ingredient"
+            label="Por Ingredientes"
+            onClick={ () => history.push('bebidas/ingredientes') }
+          >
+            Por Ingredientes
+          </Button>
 
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        label="Me Surpreenda!"
-        onClick={ () => meSurpreenda() }
-      >
-        Me Surpreenda!
-      </button>
+          <Button
+            className="button-explore-drink"
+            variant="dark"
+            type="button"
+            data-testid="explore-surprise"
+            label="Me Surpreenda!"
+            onClick={ () => meSurpreenda() }
+          >
+            Me Surpreenda!
+          </Button>
+        </div>
+      </div>
       <Footer />
     </>
   );
