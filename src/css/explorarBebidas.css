@@ -13,7 +13,7 @@
 
 .background-explore-drink {
   background-color: black;
-  background-image: url(../images/capaLogin.jpeg);
+  background-image: url('../images/capaLogin.jpeg');
   height: 500px;
 }
 
